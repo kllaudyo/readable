@@ -57,4 +57,35 @@ const posts = (state=[], action) => {
     }
 };
 
-export default combineReducers({categories, posts});
+const comment = (state={}, action) => {
+    const {id, parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false} = action;
+    switch(action.type){
+        case C.ADD_COMMENT:
+            return {
+                id,
+                parentId,
+                timestamp,
+                body,
+                author,
+                voteScore,
+                deleted,
+                parentDeleted
+            };
+        default:
+            return state;
+    }
+};
+
+const comments = (state=[], action) => {
+    switch(action.type){
+        case C.ADD_COMMENT:
+            return [
+                ...state,
+                comment({}, action)
+            ];
+        default:
+            return state;
+    }
+};
+
+export default combineReducers({categories, posts, comments});
