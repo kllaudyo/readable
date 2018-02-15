@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import './index.css';
 import App from './App';
 import reducer from './reducers';
-import { fetchCategories } from './actions';
+import { fetchCategories, fetchPosts } from './actions';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = createStore(
@@ -18,6 +18,7 @@ const store = createStore(
 
 store.subscribe( () => console.log(store.getState()));
 store.dispatch(fetchCategories());
+store.dispatch(fetchPosts());
 console.log(store.getState());
 
 ReactDOM.render(<App />, document.getElementById('root'));
