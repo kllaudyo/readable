@@ -27,7 +27,7 @@ const categories = (state=[], action) => {
 };
 
 const post = (state={}, action) => {
-    const { id, timestamp=Date.now(), title, body, author, category, voteScore, deleted } = action;
+    const { id, timestamp=Date.now(), title, body, author, category, voteScore=1, deleted=false } = action;
     switch(action.type){
         case C.ADD_POST:
             return {
