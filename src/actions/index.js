@@ -30,4 +30,24 @@ export const addPost = ({ id, timestamp, title, body, author, category, voteScor
 export const
     fetchPosts = () => dispatch =>
         API.getPosts()
-            .then(posts => posts.map(post => dispatch(addPost(post))));
+            .then(posts => posts.map(post => {
+                dispatch(addPost(post));
+                post.commentCount && dispatch(fetchComments(post.id));
+            }));
+
+export const addComment = ({id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted}) => ({
+    type: C.ADD_COMMENT,
+    id,
+    parentId,
+    timestamp,
+    body,
+    author,
+    voteScore,
+    deleted,
+    parentDeleted
+});
+
+export const
+    fetchComments = id => dispatch =>
+        API.getCommentsByPost(id)
+            .then(comments => comments.map(comment => dispatch(addComment(comment))));
