@@ -27,7 +27,19 @@ const categories = (state=[], action) => {
 };
 
 const post = (state={}, action) => {
+    const { id, timestamp, title, body, author, category, voteScore, deleted } = action;
     switch(action.type){
+        case C.ADD_POST:
+            return {
+                id,
+                timestamp,
+                title,
+                body,
+                author,
+                category,
+                voteScore,
+                deleted
+            };
         default:
             return state;
     }
@@ -35,6 +47,11 @@ const post = (state={}, action) => {
 
 const posts = (state=[], action) => {
     switch(action.type){
+        case C.ADD_POST:
+            return [
+                ...state,
+                post({}, action)
+            ];
         default:
             return state;
     }
