@@ -1,6 +1,7 @@
+import { combineReducers } from 'redux';
 import C from '../utils/constants';
 
-export const category = (state={}, action) => {
+const category = (state={}, action) => {
     const { name, path } = action;
     switch(action.type){
         case C.ADD_CATEGORY:
@@ -13,7 +14,7 @@ export const category = (state={}, action) => {
     }
 };
 
-export const categories = (state=[], action) => {
+const categories = (state=[], action) => {
     switch(action.type){
         case C.ADD_CATEGORY:
             return [
@@ -24,3 +25,5 @@ export const categories = (state=[], action) => {
             return state;
     }
 };
+
+export default combineReducers({categories});
