@@ -8,4 +8,8 @@ const headers = {
 export const
     getCategories = () =>
         fetch(`${base_url}/categories`, { headers })
+            .then(res => res.json()),
+
+    getPosts = () =>
+        fetch(`${base_url}/posts`, { headers })
             .then(res => res.json());
