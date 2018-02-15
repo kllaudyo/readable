@@ -12,4 +12,8 @@ export const
 
     getPosts = () =>
         fetch(`${base_url}/posts`, { headers })
+            .then(res => res.json()),
+
+    getCommentsByPost = id =>
+        fetch(`${base_url}/posts/${id}/comments`, { headers })
             .then(res => res.json());
