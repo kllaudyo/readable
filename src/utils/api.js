@@ -21,4 +21,8 @@ export const
 
     getCommentsByPost = id =>
         fetch(`${base_url}/posts/${id}/comments`, { headers })
+            .then(res => res.json()),
+
+    addComment = comment =>
+        fetch(`${base_url}/comments`, { headers, method: 'POST', body: JSON.stringify(comment) })
             .then(res => res.json());
