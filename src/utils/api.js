@@ -6,12 +6,17 @@ const headers = {
 };
 
 export const
+
     getCategories = () =>
         fetch(`${base_url}/categories`, { headers })
             .then(res => res.json()),
 
     getPosts = () =>
         fetch(`${base_url}/posts`, { headers })
+            .then(res => res.json()),
+
+    addPost = post =>
+        fetch(`${base_url}/posts`, { headers, method: 'POST', body: JSON.stringify(post) })
             .then(res => res.json()),
 
     getCommentsByPost = id =>
