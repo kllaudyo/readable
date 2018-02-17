@@ -27,7 +27,7 @@ const categories = (state=[], action) => {
 };
 
 const post = (state={}, action) => {
-    const { id, timestamp=Date.now(), title, body, author, category, voteScore=1, deleted=false } = action;
+    const { id, timestamp, title, body, author, category, voteScore, deleted } = action;
     switch(action.type){
         case C.ADD_POST:
             return {
@@ -58,7 +58,7 @@ const posts = (state=[], action) => {
 };
 
 const comment = (state={}, action) => {
-    const {id, parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false} = action;
+    const {id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted} = action;
     switch(action.type){
         case C.ADD_COMMENT:
             return {
