@@ -40,7 +40,7 @@ export const
             dispatch => API.addPost({id, timestamp, title, body, author, category, voteScore, deleted })
                 .then( post => dispatch(addPost(post)) ),
 
-    addComment = ({id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted}) => ({
+    addComment = ({id=uniqid(), parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false}) => ({
         type: C.ADD_COMMENT,
         id,
         parentId,
@@ -54,5 +54,9 @@ export const
 
     fetchComments = id => dispatch =>
         API.getCommentsByPost(id)
-            .then(comments => comments.map(comment => dispatch(addComment(comment))))
+            .then(comments => comments.map(comment => dispatch(addComment(comment)))),
+
+    createComment = ({id=uniqid(), parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false}) =>
+        dispatch => API.addComment({id,timestamp, body, author, parentId, voteScore, deleted, parentDeleted})
+            .then(comment => dispatch(addComment(comment)))
 ;
