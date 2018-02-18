@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import store from './store';
+import ReadableApp from './ReadableApp';
 import registerServiceWorker from './registerServiceWorker';
 
 console.log(store.getState());
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <ReadableApp />,
+    document.getElementById('root')
+);
+
 registerServiceWorker();
