@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
-import { createMuiTheme, MuiThemeProvider } from 'material-ui/styles';
-import pink from 'material-ui/colors/pink';
-import deepPurple from 'material-ui/colors/deepPurple';
+import { connect } from 'react-redux';
+import { fetchCategories, fetchPosts } from "./actions";
 import HomePage from "./components/HomePage";
 
-const theme = createMuiTheme({
-    palette: {
-        primary: pink,
-        secondary: deepPurple,
-    },
-    status: {
-        deepPurple,
-        danger: 'orange',
-    }
-});
-
 class ReadableApp extends Component{
+
+    componentDidMount(){
+        const { onLoadCategories, onLoadPosts } = this.props;
+        onLoadCategories();
+        onLoadPosts();
+    }
+
     render(){
+        const {posts} = this.props;
         return (
-            <MuiThemeProvider theme={theme}>
-                <HomePage />
-            </MuiThemeProvider>
+            <HomePage posts={posts} />
         );
     }
 }
 
-export default ReadableApp;
+const mapStateToProps = ({posts}, ownProps) => ({
+    posts
+});
+
+const mapDispatchToProps = dispatch => ({
+    onLoadCategories: () => dispatch(fetchCategories()),
+    onLoadPosts: () => dispatch(fetchPosts())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReadableApp);

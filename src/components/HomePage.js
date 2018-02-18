@@ -66,7 +66,7 @@ class HomePage extends Component {
         return (
             <Fragment>
                 {this.renderToolbar()}
-                {this.renderContainer(<PostList posts={[{},{},{}]} />)}
+                {this.renderContainer(<PostList posts={this.props.posts} />)}
             </Fragment>
         );
     }
