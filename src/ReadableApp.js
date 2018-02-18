@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import { fetchCategories, fetchPosts } from "./actions";
 import HomePage from "./components/HomePage";
 
@@ -14,7 +15,7 @@ class ReadableApp extends Component{
     render(){
         const {posts} = this.props;
         return (
-            <HomePage posts={posts} />
+            <Route path="/" render={()=><HomePage posts={posts} />} />
         );
     }
 }
