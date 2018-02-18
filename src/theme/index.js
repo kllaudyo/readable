@@ -1,6 +1,6 @@
 import blue from "material-ui/colors/blue";
 import deepPurple from "material-ui/colors/deepPurple";
-import {createMuiTheme} from "material-ui/styles/index";
+import { createMuiTheme } from "material-ui/styles/index";
 
 const theme = createMuiTheme({
     palette: {
