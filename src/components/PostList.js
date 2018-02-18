@@ -5,12 +5,12 @@ import PostItem from "./PostItem";
 const PostList = ({posts}) => (
     <List>
         { posts.map(
-            ({id, author, title, date}) =>
+            ({id, author, title, timestamp}) =>
                 <PostItem
                     key={id}
                     author={author}
                     title={title}
-                    date={date}
+                    date={timestamp}
                 />)
         }
     </List>
