@@ -1,12 +1,21 @@
 import React from 'react';
-import Tabs from 'material-ui/Tabs';
-import CategoryItem from "./CategoryItem";
+import Tabs, {Tab} from 'material-ui/Tabs';
 
 const CategoryList = ({categories, category, onChangeCategory}) => (
-    <Tabs value={category} onChange={onChangeCategory}>
-        {categories.map(({name,path},idx) =>
-            <CategoryItem name={name} path={path} key={idx}/>
-        )}
+    <Tabs
+        centered
+        fullWidth
+        onChange={onChangeCategory}
+        value={category}
+        indicatorColor="#ffffff"
+    >
+        {categories.map(({name,path},idx) => (
+            <Tab
+                key={idx}
+                label={name}
+                value={path}
+            />
+        ))}
     </Tabs>
 );
 
