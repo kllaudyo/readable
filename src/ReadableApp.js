@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { fetchCategories, fetchPosts } from "./actions";
-import HomePage from "./components/HomePage";
+import { fetchCategories, fetchPosts } from './actions';
+import HomePage from './components/HomePage';
+import CategoryPage from './components/CategoryPage';
 
 class ReadableApp extends Component{
 
@@ -13,15 +14,19 @@ class ReadableApp extends Component{
     }
 
     render(){
-        const {posts} = this.props;
+        const { posts, categories } = this.props;
         return (
-            <Route path="/" render={()=><HomePage posts={posts} />} />
+            <Fragment>
+                <Route exact path="/" render={()=><HomePage posts={posts} />} />
+                <Route path="/categories" render={()=><CategoryPage categories={categories} posts={posts} />} />
+            </Fragment>
         );
     }
 }
 
-const mapStateToProps = ({posts}, ownProps) => ({
-    posts
+const mapStateToProps = ({posts, categories}, ownProps) => ({
+    posts,
+    categories
 });
 
 const mapDispatchToProps = dispatch => ({
