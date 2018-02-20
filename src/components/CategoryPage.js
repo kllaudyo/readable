@@ -7,13 +7,14 @@ import MenuIcon from 'material-ui-icons/Menu';
 import SortIcon from 'react-icons/lib/md/sort-by-alpha';
 import {withStyles} from "material-ui/styles/index";
 import CategoriesList from './CategoryList';
+import PostList from "./PostList";
 
 const styles = {
     root: {
         flexGrow: 1,
     },
     container:{
-        marginTop:'60px'
+        marginTop:'120px'
     },
     flex: {
         flex: 1,
@@ -29,12 +30,11 @@ class CategoryPage extends Component{
     constructor(props){
         super(props);
         this.state = {
-            category:0
+            category:'redux'
         }
     }
 
     handleChange = (event, category) => {
-        console.log('here',event);
         this.setState({ category });
     };
 
@@ -78,12 +78,19 @@ class CategoryPage extends Component{
     }
 
     render(){
-        const { categories } = this.props;
+        const { categories, posts=[] } = this.props;
         const { category } = this.state;
         return (
             <Fragment>
-                {this.renderToolbar(<CategoriesList categories={categories} category={category} onChangeCategory={this.handleChange} />)}
-                {this.renderContainer()}
+                {this.renderToolbar(
+                    <CategoriesList
+                        categories={categories}
+                        category={category}
+                        onChangeCategory={this.handleChange} />
+                )}
+                {this.renderContainer(
+                    <PostList posts={posts.filter(post=>post.category === category)}/>
+                )}
             </Fragment>
         );
     }
