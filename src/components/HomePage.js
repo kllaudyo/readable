@@ -28,7 +28,7 @@ const styles = {
 class HomePage extends Component {
 
     renderToolbar(){
-        const { classes } = this.props;
+        const { classes, onToggleDrawer } = this.props;
         return (
             <BarContainer>
                 <Toolbar>
@@ -36,6 +36,7 @@ class HomePage extends Component {
                         className={classes.menuButton}
                         color="inherit"
                         aria-label="Menu"
+                        onClick={onToggleDrawer}
                     >
                         <MenuIcon />
                     </IconButton>

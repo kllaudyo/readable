@@ -40,7 +40,7 @@ class CategoryPage extends Component{
     };
 
     renderToolbar(children){
-        const { classes } = this.props;
+        const { classes, onToggleDrawer } = this.props;
         return (
             <Fragment>
                 <BarContainer>
@@ -49,6 +49,7 @@ class CategoryPage extends Component{
                             className={classes.menuButton}
                             color="inherit"
                             aria-label="Menu"
+                            onClick={onToggleDrawer}
                         >
                             <MenuIcon />
                         </IconButton>
