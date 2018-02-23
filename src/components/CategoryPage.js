@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -8,6 +7,7 @@ import SortIcon from 'react-icons/lib/md/sort-by-alpha';
 import {withStyles} from "material-ui/styles/index";
 import CategoriesList from './CategoryList';
 import PostList from "./PostList";
+import BarContainer from "./BarContainer";
 
 const styles = {
     root: {
@@ -42,7 +42,7 @@ class CategoryPage extends Component{
         const { classes } = this.props;
         return (
             <Fragment>
-                <AppBar className={classes.root} position="fixed">
+                <BarContainer>
                     <Toolbar>
                         <IconButton
                             className={classes.menuButton}
@@ -63,7 +63,7 @@ class CategoryPage extends Component{
                         </IconButton>
                     </Toolbar>
                     {children}
-                </AppBar>
+                </BarContainer>
             </Fragment>
         );
     }
