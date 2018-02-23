@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import SortIcon from 'react-icons/lib/md/sort-by-alpha';
 import PostList from './PostList';
+import MainContainer from "./MainContainer";
+import BarContainer from "./BarContainer";
 
 const styles = {
     root: {
@@ -29,7 +30,7 @@ class HomePage extends Component {
     renderToolbar(){
         const { classes } = this.props;
         return (
-            <AppBar className={classes.root} position="fixed">
+            <BarContainer>
                 <Toolbar>
                     <IconButton
                         className={classes.menuButton}
@@ -49,24 +50,18 @@ class HomePage extends Component {
                         <SortIcon />
                     </IconButton>
                 </Toolbar>
-            </AppBar>
-        );
-    }
-
-    renderContainer(children){
-        const { classes } = this.props;
-        return (
-            <div className={classes.container}>
-                { children }
-            </div>
+            </BarContainer>
         );
     }
 
     render(){
+        const { classes } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar()}
-                {this.renderContainer(<PostList posts={this.props.posts} />)}
+                <MainContainer classNames={classes.container}>
+                    <PostList posts={this.props.posts} />
+                </MainContainer>
             </Fragment>
         );
     }

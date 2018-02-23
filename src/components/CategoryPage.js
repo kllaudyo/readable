@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -8,6 +8,7 @@ import {withStyles} from "material-ui/styles/index";
 import CategoriesList from './CategoryList';
 import PostList from "./PostList";
 import BarContainer from "./BarContainer";
+import MainContainer from './MainContainer';
 
 const styles = {
     root: {
@@ -68,17 +69,8 @@ class CategoryPage extends Component{
         );
     }
 
-    renderContainer(children){
-        const { classes } = this.props;
-        return (
-            <div className={classes.container}>
-                { children }
-            </div>
-        );
-    }
-
     render(){
-        const { categories, posts=[] } = this.props;
+        const { classes, categories, posts=[] } = this.props;
         const { category } = this.state;
         return (
             <Fragment>
@@ -86,11 +78,12 @@ class CategoryPage extends Component{
                     <CategoriesList
                         categories={categories}
                         category={category}
-                        onChangeCategory={this.handleChange} />
+                        onChangeCategory={this.handleChange}
+                    />
                 )}
-                {this.renderContainer(
+                <MainContainer classNames={classes.container}>
                     <PostList posts={posts.filter(post=>post.category === category)}/>
-                )}
+                </MainContainer>
             </Fragment>
         );
     }
