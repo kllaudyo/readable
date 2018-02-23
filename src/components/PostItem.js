@@ -7,7 +7,7 @@ import lightBlue from 'material-ui/colors/lightBlue';
 
 const PostItem = ({author, title, date}) => (
     <React.Fragment>
-        <ListItem>
+        <ListItem button>
             <Avatar style={{backgroundColor:lightBlue[200]}}>
                 <Person />
             </Avatar>
