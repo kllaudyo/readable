@@ -8,6 +8,7 @@ const PostList = ({posts}) => (
             ({id, author, title, timestamp}) =>
                 <PostItem
                     key={id}
+                    id={id}
                     author={author}
                     title={title}
                     date={timestamp}
