@@ -10,13 +10,13 @@ import {
     ListItemText
 } from 'material-ui';
 
-const MainMenu = ({open, onToggleDrawer}) => (
-    <Drawer open={open} onClose={() => onToggleDrawer(false)}>
+const MainMenu = ({open, onClose}) => (
+    <Drawer open={open} onClose={onClose}>
         <div
             tabIndex={0}
             role="button"
-            onClick={() => onToggleDrawer(false)}
-            onKeyDown={() => onToggleDrawer(false)}
+            onClick={onClose}
+            onKeyDown={onClose}
         >
             <List>
                 <ListItem button component={Link} to="/">
