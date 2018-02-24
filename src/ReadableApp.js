@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
+import sortBy from 'sort-by';
 import { fetchCategories, fetchPosts } from './actions';
 import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
@@ -15,7 +16,7 @@ class ReadableApp extends Component{
         this.state = {
             is_open_drawer : false,
             is_open_sort_menu : false,
-            sort_by:'date'
+            sort:'timestamp'
         }
     }
 
@@ -25,8 +26,8 @@ class ReadableApp extends Component{
     toggleSortMenu = is_open_sort_menu =>
         this.setState({is_open_sort_menu});
 
-    handleSortBy = sort_by => {
-        this.setState({sort_by});
+    handleSortBy = sort => {
+        this.setState({sort});
     };
 
     componentDidMount(){
@@ -36,8 +37,9 @@ class ReadableApp extends Component{
     }
 
     render(){
-        const { is_open_drawer, is_open_sort_menu, sort_by } = this.state;
+        const { is_open_drawer, is_open_sort_menu, sort } = this.state;
         const { posts, categories } = this.props;
+        const sortedPosts = posts.sort(sortBy(sort));
         return (
             <Fragment>
                 <MainMenu
@@ -46,14 +48,14 @@ class ReadableApp extends Component{
                 />
                 <SortMenu
                     open={is_open_sort_menu}
-                    sortBy={sort_by}
+                    sortBy={sort}
                     onClose={()=>this.toggleSortMenu(false)}
                     onSortBy={this.handleSortBy}
                 />
                 <Route
                     exact path="/"
                     render={ () => <HomePage
-                        posts={posts}
+                        posts={sortedPosts}
                         onOpenDrawer={() => this.toggleDrawer(true)}
                         onOpenSortMenu={() => this.toggleSortMenu(true)}
                     />}
@@ -62,7 +64,7 @@ class ReadableApp extends Component{
                     path="/categories"
                     render={ () => <CategoryPage
                         categories={categories}
-                        posts={posts}
+                        posts={sortedPosts}
                         onOpenDrawer={() => this.toggleDrawer(true)}
                         onOpenSortMenu={() => this.toggleSortMenu(true)}
                     />}
