@@ -28,7 +28,7 @@ const styles = {
 class HomePage extends Component {
 
     renderToolbar(){
-        const { classes, onToggleDrawer } = this.props;
+        const { classes, onOpenDrawer, onOpenSortMenu } = this.props;
         return (
             <BarContainer>
                 <Toolbar>
@@ -36,7 +36,7 @@ class HomePage extends Component {
                         className={classes.menuButton}
                         color="inherit"
                         aria-label="Menu"
-                        onClick={onToggleDrawer}
+                        onClick={onOpenDrawer}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -47,7 +47,10 @@ class HomePage extends Component {
                     >
                         Readable
                     </Typography>
-                    <IconButton color="inherit">
+                    <IconButton
+                        color="inherit"
+                        onClick={onOpenSortMenu}
+                    >
                         <SortIcon />
                     </IconButton>
                 </Toolbar>

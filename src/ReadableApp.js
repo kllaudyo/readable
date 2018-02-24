@@ -6,18 +6,27 @@ import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
 import PostPage from './components/PostPage';
+import SortMenu from "./components/SortMenu";
 
 class ReadableApp extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            is_open_drawer : false
+            is_open_drawer : false,
+            is_open_sort_menu : false,
+            sort_by:'date'
         }
     }
 
-    toggleDrawer = is_open_drawer => {
+    toggleDrawer = is_open_drawer =>
         this.setState({is_open_drawer});
+
+    toggleSortMenu = is_open_sort_menu =>
+        this.setState({is_open_sort_menu});
+
+    handleSortBy = sort_by => {
+        this.setState({sort_by});
     };
 
     componentDidMount(){
@@ -27,19 +36,26 @@ class ReadableApp extends Component{
     }
 
     render(){
-        const { is_open_drawer } = this.state;
+        const { is_open_drawer, is_open_sort_menu, sort_by } = this.state;
         const { posts, categories } = this.props;
         return (
             <Fragment>
                 <MainMenu
                     open={is_open_drawer}
-                    onToggleDrawer={this.toggleDrawer}
+                    onClose={()=>this.toggleDrawer(false)}
+                />
+                <SortMenu
+                    open={is_open_sort_menu}
+                    sortBy={sort_by}
+                    onClose={()=>this.toggleSortMenu(false)}
+                    onSortBy={this.handleSortBy}
                 />
                 <Route
                     exact path="/"
                     render={ () => <HomePage
                         posts={posts}
-                        onToggleDrawer={() => this.toggleDrawer(true)}
+                        onOpenDrawer={() => this.toggleDrawer(true)}
+                        onOpenSortMenu={() => this.toggleSortMenu(true)}
                     />}
                 />
                 <Route
@@ -47,7 +63,8 @@ class ReadableApp extends Component{
                     render={ () => <CategoryPage
                         categories={categories}
                         posts={posts}
-                        onToggleDrawer={() => this.toggleDrawer(true)}
+                        onOpenDrawer={() => this.toggleDrawer(true)}
+                        onOpenSortMenu={() => this.toggleSortMenu(true)}
                     />}
                 />
                 <Route
