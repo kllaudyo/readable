@@ -15,7 +15,7 @@ const styles = {
         flexGrow: 1,
     },
     container:{
-        marginTop:'110px'
+        marginTop:'60px'
     },
     flex: {
         flex: 1,
@@ -28,18 +28,7 @@ const styles = {
 
 class CategoryPage extends Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            category:'redux'
-        }
-    }
-
-    handleChange = (event, category) => {
-        this.setState({ category });
-    };
-
-    renderToolbar(children){
+    renderToolbar(title){
         const { classes, onOpenDrawer, onOpenSortMenu } = this.props;
         return (
             <Fragment>
@@ -58,7 +47,7 @@ class CategoryPage extends Component{
                             color="inherit"
                             className={classes.flex}
                         >
-                            Readable
+                            {title}
                         </Typography>
                         <IconButton
                             color="inherit"
@@ -67,26 +56,18 @@ class CategoryPage extends Component{
                             <SortIcon />
                         </IconButton>
                     </Toolbar>
-                    {children}
                 </BarContainer>
             </Fragment>
         );
     }
 
     render(){
-        const { classes, categories, posts=[] } = this.props;
-        const { category } = this.state;
+        const { classes, category={}, posts=[] } = this.props;
         return (
             <Fragment>
-                {this.renderToolbar(
-                    <CategoriesList
-                        categories={categories}
-                        category={category}
-                        onChangeCategory={this.handleChange}
-                    />
-                )}
+                {this.renderToolbar(category.name)}
                 <MainContainer classNames={classes.container}>
-                    <PostList posts={posts.filter(post=>post.category === category)}/>
+                    <PostList posts={posts} />
                 </MainContainer>
             </Fragment>
         );
