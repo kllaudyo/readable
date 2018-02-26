@@ -44,6 +44,7 @@ class ReadableApp extends Component{
             <Fragment>
                 <MainMenu
                     open={is_open_drawer}
+                    categories={categories}
                     onClose={()=>this.toggleDrawer(false)}
                 />
                 <SortMenu
@@ -61,10 +62,10 @@ class ReadableApp extends Component{
                     />}
                 />
                 <Route
-                    path="/categories"
-                    render={ () => <CategoryPage
-                        categories={categories}
-                        posts={sortedPosts}
+                    path="/category/:path"
+                    render={ ({match}) => <CategoryPage
+                        category={categories.filter(category => category.path === match.params.path)[0]}
+                        posts={sortedPosts.filter(post => post.category === match.params.path)}
                         onOpenDrawer={() => this.toggleDrawer(true)}
                         onOpenSortMenu={() => this.toggleSortMenu(true)}
                     />}

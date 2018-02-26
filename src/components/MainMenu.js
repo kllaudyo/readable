@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PostIcon from 'react-icons/lib/md/local-post-office';
-import CategoryIcon from 'react-icons/lib/md/local-offer';
 import {
     Drawer,
     List,
@@ -9,8 +8,9 @@ import {
     ListItemIcon,
     ListItemText
 } from 'material-ui';
+import CategoryItem from "./CategoryItem";
 
-const MainMenu = ({open, onClose}) => (
+const MainMenu = ({open, categories, onClose}) => (
     <Drawer open={open} onClose={onClose}>
         <div
             tabIndex={0}
@@ -25,12 +25,13 @@ const MainMenu = ({open, onClose}) => (
                     </ListItemIcon>
                     <ListItemText primary="All" />
                 </ListItem>
-                <ListItem button component={Link} to="/categories">
-                    <ListItemIcon>
-                        <CategoryIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Categories" />
-                </ListItem>
+                {categories.map( (category, index) =>
+                    <CategoryItem
+                        key={index}
+                        path={category.path}
+                        name={category.name}
+                    />
+                )}
             </List>
         </div>
     </Drawer>
