@@ -5,10 +5,10 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import SortIcon from 'react-icons/lib/md/sort-by-alpha';
 import {withStyles} from "material-ui/styles/index";
-import CategoriesList from './CategoryList';
 import PostList from "./PostList";
 import BarContainer from "./BarContainer";
 import MainContainer from './MainContainer';
+import AddFab from './AddFab';
 
 const styles = {
     root: {
@@ -69,6 +69,7 @@ class CategoryPage extends Component{
                 <MainContainer classNames={classes.container}>
                     <PostList posts={posts} />
                 </MainContainer>
+                <AddFab href="/post-form" />
             </Fragment>
         );
     }
