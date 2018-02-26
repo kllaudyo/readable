@@ -17,7 +17,7 @@ class ReadableApp extends Component{
         this.state = {
             is_open_drawer : false,
             is_open_sort_menu : false,
-            sort:'timestamp'
+            sort:'-voteScore'
         }
     }
 

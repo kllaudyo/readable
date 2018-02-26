@@ -11,8 +11,8 @@ import CheckedIcon from 'react-icons/lib/md/radio-button-checked';
 import UnCheckedIcon from 'react-icons/lib/md/radio-button-unchecked';
 
 const sortOptions = [
-    {value:'timestamp',text:'Date'},
-    {value:'voteScore',text:'Score'},
+    {value:'-timestamp',text:'Date'},
+    {value:'-voteScore',text:'Score'},
 ];
 
 const SortMenu = ({open, sortBy="date", onClose, onSortBy}) => (
