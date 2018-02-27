@@ -9,9 +9,6 @@ export default connect(
         comments: comments.filter(comment => comment.parentId === match.params.id)
     })
 )(withStyles(theme => ({
-    root: {
-        flexGrow: 1,
-    },
     container:theme.mixins.gutters({
         paddingTop: 16,
         paddingBottom: 16,
@@ -25,6 +22,7 @@ export default connect(
         marginRight: 20
     },
     root: theme.mixins.gutters({
+        flexGrow: 1,
         paddingTop: 16,
         paddingBottom: 16,
         marginTop: theme.spacing.unit * 3,
