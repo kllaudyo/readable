@@ -6,8 +6,7 @@ import MainContainer from './MainContainer';
 import { Link } from "react-router-dom";
 import {withStyles} from "material-ui/styles/index";
 
-
-class PostForm extends Component{
+class PostFormPage extends Component{
     render(){
         const { classes } = this.props;
         return (
@@ -82,4 +81,4 @@ export default withStyles(theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit
     },
-}))(PostForm);
+}))(PostFormPage);

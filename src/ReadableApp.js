@@ -7,7 +7,7 @@ import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
 import PostPage from './components/PostPage';
-import PostForm from './components/PostForm';
+import PostFormPage from './components/PostFormPage';
 import SortMenu from "./components/SortMenu";
 
 class ReadableApp extends Component{
@@ -77,7 +77,7 @@ class ReadableApp extends Component{
                 />
                 <Route
                     path="/post-form"
-                    component={PostForm}
+                    component={PostFormPage}
                 />
             </Fragment>
         );
