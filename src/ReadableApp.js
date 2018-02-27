@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import sortBy from 'sort-by';
-import { fetchCategories, fetchPosts } from './actions';
+import {createPost, fetchCategories, fetchPosts} from './actions';
 import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
@@ -39,7 +39,7 @@ class ReadableApp extends Component{
 
     render(){
         const { is_open_drawer, is_open_sort_menu, sort } = this.state;
-        const { posts, categories } = this.props;
+        const { posts, categories, onCreatePost } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
             <Fragment>
@@ -77,7 +77,11 @@ class ReadableApp extends Component{
                 />
                 <Route
                     path="/post-form"
-                    component={PostFormPage}
+                    render = { ()=>
+                        <PostFormPage
+                            categories={categories}
+                            onCreatePost={onCreatePost}
+                        />}
                 />
             </Fragment>
         );
@@ -91,7 +95,8 @@ const mapStateToProps = ({posts, categories}, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     onLoadCategories: () => dispatch(fetchCategories()),
-    onLoadPosts: () => dispatch(fetchPosts())
+    onLoadPosts: () => dispatch(fetchPosts()),
+    onCreatePost: ({title, author, body, category}) => dispatch(createPost({title, author, body, category}))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));
