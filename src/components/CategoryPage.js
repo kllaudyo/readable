@@ -69,7 +69,7 @@ class CategoryPage extends Component{
                 <MainContainer classNames={classes.container}>
                     <PostList posts={posts} />
                 </MainContainer>
-                <AddFab href="/post-form" />
+                <AddFab href="/form-post" />
             </Fragment>
         );
     }

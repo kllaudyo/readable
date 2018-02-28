@@ -65,7 +65,7 @@ class HomePage extends Component {
                 <MainContainer classNames={classes.container}>
                     <PostList posts={this.props.posts} />
                 </MainContainer>
-                <AddFab href="/post-form" />
+                <AddFab href="/form-post" />
             </Fragment>
         );
     }

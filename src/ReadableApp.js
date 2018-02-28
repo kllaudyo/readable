@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import sortBy from 'sort-by';
-import {createPost, fetchCategories, fetchPosts} from './actions';
+import { fetchCategories, fetchPosts } from './actions';
 import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
@@ -31,7 +31,7 @@ class ReadableApp extends Component{
         this.setState({sort});
     };
 
-    componentDidMount(){
+    componentWillMount(){
         const { onLoadCategories, onLoadPosts } = this.props;
         onLoadCategories();
         onLoadPosts();
@@ -39,7 +39,7 @@ class ReadableApp extends Component{
 
     render(){
         const { is_open_drawer, is_open_sort_menu, sort } = this.state;
-        const { posts, categories, onCreatePost } = this.props;
+        const { posts = {}, categories, onCreatePost } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
             <Fragment>
@@ -73,15 +73,11 @@ class ReadableApp extends Component{
                 />
                 <Route
                     path="/post/:id"
-                    component={PostPage}
+                    component={ PostPage }
                 />
                 <Route
-                    path="/post-form"
-                    render = { ()=>
-                        <PostFormPage
-                            categories={categories}
-                            onCreatePost={onCreatePost}
-                        />}
+                    path="/form-post/:id?"
+                    component = { PostFormPage }
                 />
             </Fragment>
         );
@@ -95,8 +91,7 @@ const mapStateToProps = ({posts, categories}, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     onLoadCategories: () => dispatch(fetchCategories()),
-    onLoadPosts: () => dispatch(fetchPosts()),
-    onCreatePost: ({title, author, body, category}) => dispatch(createPost({title, author, body, category}))
+    onLoadPosts: () => dispatch(fetchPosts())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));
