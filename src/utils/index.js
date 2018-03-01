@@ -13,6 +13,9 @@ export const
     filterArrayByParentId = (array, parentId) =>
         array.filter(item => item.parentId === parentId),
 
+    filterArrayByCategory = (array, category) =>
+        array.filter(item => item.category === category),
+
     findById = compose(
         getFirstArrayItem,
         filterArrayById
@@ -26,4 +29,5 @@ export const
     findByParentId = compose(
         getFirstArrayItem,
         filterArrayByParentId
-    );
+    )
+;
