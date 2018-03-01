@@ -10,6 +10,7 @@ import PostPage from './components/PostPage';
 import PostFormPage from './components/PostFormPage';
 import SortMenu from "./components/SortMenu";
 import {filterArrayByCategory, findByPath} from "./utils";
+import EditPostPage from "./components/EditPostPage";
 
 class ReadableApp extends Component{
 
@@ -78,7 +79,7 @@ class ReadableApp extends Component{
                 />
                 <Route
                     path="/form-post/:id?"
-                    component = { PostFormPage }
+                    component = { EditPostPage }
                 />
             </Fragment>
         );
