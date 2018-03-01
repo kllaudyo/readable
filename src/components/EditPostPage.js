@@ -31,7 +31,7 @@ const styles = theme => ({
 });
 
 const mapStateToProps = ({ posts, categories }, { match }) => {
-    const { author, title, body, category } = findById(posts, match.params.id) || {};
+    const { author, title, body, category } = match.params.id ? findById(posts, match.params.id) : {};
     return ({
         author,
         title,
