@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Toolbar, Typography, IconButton, Paper } from  'material-ui';
+import { Toolbar, Typography, IconButton, Paper, Badge } from  'material-ui';
 import ArrowBackIcon from 'react-icons/lib/md/arrow-back';
 import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
 import EditIcon from 'react-icons/lib/md/create';
+import HeartIcon from 'react-icons/lib/md/favorite';
 import BarContainer from './BarContainer';
 import MainContainer from './MainContainer';
 import Post from './Post';
@@ -12,7 +13,7 @@ import CommentList from "./CommentList";
 
 const PostDetails = props => {
     const { classes, post = {}, comments = [] } = props;
-    const { id, author, body, title} = post;
+    const { id, author, body, title, voteScore } = post;
     return (
         <Fragment>
             <BarContainer>
@@ -29,9 +30,20 @@ const PostDetails = props => {
                         variant="title"
                         color="inherit"
                         className={classes.flex} />
-                    <IconButton component={Link} to={`/form-post/${id}`} color="inherit"><EditIcon/></IconButton>
-                    <IconButton color="inherit"><ThumbDownIcon/></IconButton>
-                    <IconButton color="inherit"><ThumbUpIcon/></IconButton>
+                    <IconButton component={Link} to={`/form-post/${id}`} color="inherit">
+                        <EditIcon/>
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <ThumbDownIcon/>
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <ThumbUpIcon/>
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <Badge badgeContent={voteScore} color="secondary">
+                            <HeartIcon/>
+                        </Badge>
+                    </IconButton>
                 </Toolbar>
             </BarContainer>
             <MainContainer classNames={classes.container}>
