@@ -9,6 +9,7 @@ import CategoryPage from './components/CategoryPage';
 import PostPage from './components/PostPage';
 import PostFormPage from './components/PostFormPage';
 import SortMenu from "./components/SortMenu";
+import {findByPath} from "./utils";
 
 class ReadableApp extends Component{
 
@@ -65,7 +66,7 @@ class ReadableApp extends Component{
                 <Route
                     path="/category/:path"
                     render={ ({match}) => <CategoryPage
-                        category={categories.filter(category => category.path === match.params.path)[0]}
+                        category={findByPath(categories, match.params.path)}
                         posts={sortedPosts.filter(post => post.category === match.params.path)}
                         onOpenDrawer={() => this.toggleDrawer(true)}
                         onOpenSortMenu={() => this.toggleSortMenu(true)}
