@@ -4,6 +4,11 @@ import * as API from '../utils/api';
 
 export const
 
+    sortPosts = sortBy => ({
+        type: C.SORT_POSTS,
+        sortBy
+    }),
+
     addCategory = (name, path) => ({
         type: C.ADD_CATEGORY,
         name,
