@@ -5,9 +5,9 @@ import PostDetails from './PostDetails';
 import classes from '../classes';
 
 export default connect(
-    ({posts, comments}, {id, onOpenForm}) => ({
-        post: findById(posts, id),
-        comments: filterArrayByParentId(comments, id),
-        onOpenForm
+    ({posts, comments}, ownProps) => ({
+        post: findById(posts, ownProps.id),
+        comments: filterArrayByParentId(comments, ownProps.id),
+        ...ownProps
     })
 )(withStyles(classes)(PostDetails));

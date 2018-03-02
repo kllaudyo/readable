@@ -13,7 +13,7 @@ import Post from './Post';
 import CommentList from "./CommentList";
 
 const PostDetails = props => {
-    const { classes, post = {}, comments = [], onOpenForm } = props;
+    const { classes, post = {}, comments = [], onOpenForm, onPositivePost, onNegativePost } = props;
     const { id, author, body, title, voteScore=0 } = post;
     return (
         <Fragment>
@@ -37,10 +37,10 @@ const PostDetails = props => {
                     <IconButton component={Link} to={`/form-post/${id}`} color="inherit">
                         <EditIcon/>
                     </IconButton>
-                    <IconButton color="inherit">
+                    <IconButton onClick={()=>onNegativePost(post)} color="inherit">
                         <ThumbDownIcon/>
                     </IconButton>
-                    <IconButton color="inherit">
+                    <IconButton onClick={()=>onPositivePost(post)} color="inherit">
                         <ThumbUpIcon/>
                     </IconButton>
                     <IconButton color="inherit">
