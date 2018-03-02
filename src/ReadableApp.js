@@ -10,7 +10,6 @@ import PostPage from './components/PostPage';
 import SortMenu from "./components/SortMenu";
 import {filterArrayByCategory, findByPath} from "./utils";
 import EditPostPage from "./components/EditPostPage";
-import CommentForm from "./components/CommentForm";
 import C from "./utils/constants";
 
 const sortOptions = [
@@ -24,8 +23,7 @@ class ReadableApp extends Component{
         super(props);
         this.state = {
             is_open_drawer : false,
-            is_open_sort_menu : false,
-            is_open_comment_form : false
+            is_open_sort_menu : false
         }
     }
 
@@ -35,12 +33,6 @@ class ReadableApp extends Component{
     toggleSortMenu = is_open_sort_menu =>
         this.setState({is_open_sort_menu});
 
-    toggleCommentForm = is_open_comment_form =>
-        this.setState({is_open_comment_form});
-
-    handleSubmitComment = comment =>
-        console.log(comment);
-
     componentWillMount(){
         const { onLoadCategories, onLoadPosts } = this.props;
         onLoadCategories();
@@ -48,7 +40,7 @@ class ReadableApp extends Component{
     }
 
     render(){
-        const { is_open_drawer, is_open_sort_menu, is_open_comment_form } = this.state;
+        const { is_open_drawer, is_open_sort_menu } = this.state;
         const {
             posts = {},
             categories,
@@ -74,11 +66,6 @@ class ReadableApp extends Component{
                     sortBy={sort}
                     onClose={()=>this.toggleSortMenu(false)}
                     onSortBy={onSortBy}
-                />
-                <CommentForm
-                    open={is_open_comment_form}
-                    onClose={()=>this.toggleCommentForm(false)}
-                    onSubmit={this.handleSubmitComment}
                 />
                 <Route
                     exact path="/"
