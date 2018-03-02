@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
-import {filterArrayByParentId, findById } from "../utils";
+import { filterArrayByParentId, findById } from "../utils";
 import PostDetails from './PostDetails';
 
 export default connect(
