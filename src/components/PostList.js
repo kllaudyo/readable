@@ -2,7 +2,7 @@ import React from 'react';
 import List from 'material-ui/List';
 import PostItem from "./PostItem";
 
-const PostList = ({posts}) => (
+const PostList = ({posts, onPositivePost, onNegativePost}) => (
     <List>
         { posts.map(
             ({id, author, title, timestamp, voteScore}) =>
@@ -13,6 +13,8 @@ const PostList = ({posts}) => (
                     title={title}
                     date={timestamp}
                     voteScore={voteScore}
+                    onPositivePost={onPositivePost}
+                    onNegativePost={onNegativePost}
                 />)
         }
     </List>

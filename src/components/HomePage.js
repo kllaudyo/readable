@@ -43,12 +43,16 @@ class HomePage extends Component {
     }
 
     render(){
-        const { classes, posts } = this.props;
+        const { classes, posts, onPositivePost, onNegativePost } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar()}
                 <MainContainer classNames={classes.container}>
-                    <PostList posts={posts} />
+                    <PostList
+                        posts={posts}
+                        onPositivePost={onPositivePost}
+                        onNegativePost={onNegativePost}
+                    />
                 </MainContainer>
                 <AddFab href="/form-post" />
             </Fragment>

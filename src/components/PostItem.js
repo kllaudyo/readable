@@ -8,7 +8,7 @@ import ThumbUpIcon from "react-icons/lib/md/thumb-up";
 import HeartIcon from 'react-icons/lib/md/favorite';
 import classes from '../classes';
 
-const PostItem = ({classes, id, author, title, date, voteScore}) => (
+const PostItem = ({classes, id, author, title, date, voteScore, onPositivePost, onNegativePost}) => (
     <React.Fragment>
         <ListItem button component={ Link } to={`/post/${id}`}>
             <Avatar className={classes.avatar}>
@@ -24,10 +24,10 @@ const PostItem = ({classes, id, author, title, date, voteScore}) => (
                     <HeartIcon/>
                 </Badge>
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={()=>onNegativePost({id})}>
                     <ThumbDownIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={()=>onPositivePost({id})}>
                     <ThumbUpIcon />
                 </IconButton>
             </ListItemSecondaryAction>

@@ -47,12 +47,16 @@ class CategoryPage extends Component{
     }
 
     render(){
-        const { classes, category={}, posts=[] } = this.props;
+        const { classes, category={}, posts=[], onPositivePost, onNegativePost } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar(category.name)}
                 <MainContainer classNames={classes.container}>
-                    <PostList posts={posts} />
+                    <PostList
+                        posts={posts}
+                        onPositivePost={onPositivePost}
+                        onNegativePost={onNegativePost}
+                    />
                 </MainContainer>
                 <AddFab href="/form-post" />
             </Fragment>
