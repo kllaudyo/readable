@@ -43,12 +43,12 @@ class HomePage extends Component {
     }
 
     render(){
-        const { classes } = this.props;
+        const { classes, posts } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar()}
                 <MainContainer classNames={classes.container}>
-                    <PostList posts={this.props.posts} />
+                    <PostList posts={posts} />
                 </MainContainer>
                 <AddFab href="/form-post" />
             </Fragment>
