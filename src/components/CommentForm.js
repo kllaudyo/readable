@@ -10,8 +10,15 @@ import {
 } from 'material-ui';
 import classes from '../classes';
 
-const CommentForm = ({ classes, open, comment={}, onClose, onSave }) =>
-    <Dialog
+const CommentForm = ({ classes, open, comment={}, onClose, onSubmit }) => {
+    let _comment;
+    const submit = e => {
+        onSubmit({body: _comment.value});
+        onClose();
+        _comment.value = "";
+    };
+    return (
+        <Dialog
         open={open}
         onClose={onClose}
         arial-labelledby="form-dialog-title"
@@ -20,6 +27,7 @@ const CommentForm = ({ classes, open, comment={}, onClose, onSave }) =>
         <DialogContent className={classes.commentForm}>
             <TextField
                 autoFocus
+                inputRef={input => _comment = input}
                 margin="dense"
                 label="Tell us your comment:"
                 fullWidth
@@ -33,12 +41,14 @@ const CommentForm = ({ classes, open, comment={}, onClose, onSave }) =>
                 Cancel
             </Button>
             <Button
-                onClick={onSave}
+                onClick={submit}
                 color="primary"
             >
                 Save
             </Button>
         </DialogActions>
-    </Dialog>;
+    </Dialog>
+    );
+};
 
 export default withStyles(classes)(CommentForm);

@@ -7,6 +7,7 @@ import PostDetails from './PostDetails';
 import CommentForm from "./CommentForm";
 import classes from '../classes';
 import C from "../utils/constants";
+import {createComment} from "../actions";
 
 class PostPage extends Component{
 
@@ -20,8 +21,12 @@ class PostPage extends Component{
     toggleCommentForm = is_open_comment_form =>
         this.setState({is_open_comment_form});
 
-    handleSubmitComment = comment =>
-        console.log(comment);
+    handleSubmitComment = ({id, author, body}) => {
+        const { onCreateComment, post } = this.props;
+        id === undefined ?
+            onCreateComment({id, body, parentId:post.id}) :
+            null;
+    };
 
     render(){
         const { is_open_comment_form } = this.state;
@@ -41,11 +46,19 @@ class PostPage extends Component{
     }
 }
 
+const mapStateToProps = ({posts, comments}, ownProps) => ({
+    post: findById(posts, ownProps.id),
+    comments: filterArrayByParentId(comments, ownProps.id)
+        .sort(sortBy(C.SORTED_BY_VOTE_SCORE)),
+    ...ownProps
+});
+
+const mapDispatchToProps = dispatch => ({
+    onCreateComment: ({body, parentId}) =>
+        dispatch(createComment({body, parentId}))
+});
+
 export default connect(
-    ({posts, comments}, ownProps) => ({
-        post: findById(posts, ownProps.id),
-        comments: filterArrayByParentId(comments, ownProps.id)
-            .sort(sortBy(C.SORTED_BY_VOTE_SCORE)),
-        ...ownProps
-    })
+    mapStateToProps,
+    mapDispatchToProps
 )(withStyles(classes)(PostPage));
