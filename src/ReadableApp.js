@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import sortBy from 'sort-by';
-import { fetchCategories, fetchPosts, sortPosts, votePost } from './actions';
+import { fetchCategories, fetchPosts, sortPosts, votePost, voteComment } from './actions';
 import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
@@ -55,7 +55,9 @@ class ReadableApp extends Component{
             sort,
             onSortBy,
             onPositivePost,
-            onNegativePost
+            onNegativePost,
+            onPositiveComment,
+            onNegativeComment
         } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
@@ -107,6 +109,8 @@ class ReadableApp extends Component{
                             onOpenForm= {() => this.toggleCommentForm(true)}
                             onPositivePost={onPositivePost}
                             onNegativePost={onNegativePost}
+                            onPositiveComment={onPositiveComment}
+                            onNegativeComment={onNegativeComment}
                         />
                     }
                 />
@@ -131,6 +135,8 @@ const mapDispatchToProps = dispatch => ({
     onSortBy: sortBy => dispatch(sortPosts(sortBy)),
     onPositivePost: ({id}) => dispatch(votePost(id, "upVote")),
     onNegativePost: ({id}) => dispatch(votePost(id, "downVote")),
+    onPositiveComment: ({id}) => dispatch(voteComment(id, "upVote")),
+    onNegativeComment: ({id}) => dispatch(voteComment(id, "downVote"))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));
