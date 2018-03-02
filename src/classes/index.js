@@ -39,5 +39,8 @@ export default theme => ({
     },
     avatar: {
         backgroundColor:lightBlue[200]
+    },
+    commentForm: {
+        minWidth: 350
     }
 });
