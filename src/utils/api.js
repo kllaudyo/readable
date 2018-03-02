@@ -32,6 +32,6 @@ export const
             .then(res => res.json()),
 
     voteComment = (id, option) =>
-        fetch(`${base_url}/comments/${id}`, { headers, method: 'POST', body: JSON.stringify(option) })
+        fetch(`${base_url}/comments/${id}`, { headers, method: 'POST', body: JSON.stringify({option}) })
             .then(res => res.json())
 ;

@@ -76,9 +76,13 @@ export const
         dispatch => API.addComment({id,timestamp, body, author, parentId, voteScore, deleted, parentDeleted})
             .then(comment => dispatch(addComment(comment))),
 
-    commentVoteScore = (id, option) => ({
+    commentVoteScore = ({id, voteScore}) => ({
         type: C.COMMENT_VOTE_SCORE,
         id,
-        option
-    })
+        voteScore
+    }),
+
+    voteComment = (id, vote) =>
+        dispatch => API.voteComment(id, vote)
+            .then( comment => dispatch(commentVoteScore(comment)))
 ;

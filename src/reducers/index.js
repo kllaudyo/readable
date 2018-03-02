@@ -82,6 +82,13 @@ const comment = (state={}, action) => {
                 deleted,
                 parentDeleted
             };
+        case C.COMMENT_VOTE_SCORE:
+            return state.id !== id ?
+                state :
+                {
+                    ...state,
+                    voteScore
+                };
         default:
             return state;
     }
@@ -94,6 +101,10 @@ const comments = (state=[], action) => {
                 ...state,
                 comment({}, action)
             ];
+        case C.COMMENT_VOTE_SCORE:
+            return state.map(
+                c => comment(c, action)
+            );
         default:
             return state;
     }
