@@ -11,6 +11,7 @@ import PostFormPage from './components/PostFormPage';
 import SortMenu from "./components/SortMenu";
 import {filterArrayByCategory, findByPath} from "./utils";
 import EditPostPage from "./components/EditPostPage";
+import CommentForm from "./components/CommentForm";
 
 class ReadableApp extends Component{
 
@@ -19,6 +20,7 @@ class ReadableApp extends Component{
         this.state = {
             is_open_drawer : false,
             is_open_sort_menu : false,
+            is_open_comment_form : false,
             sort:'-voteScore'
         }
     }
@@ -29,9 +31,14 @@ class ReadableApp extends Component{
     toggleSortMenu = is_open_sort_menu =>
         this.setState({is_open_sort_menu});
 
-    handleSortBy = sort => {
+    toggleCommentForm = is_open_comment_form =>
+        this.setState({is_open_comment_form});
+
+    handleSortBy = sort =>
         this.setState({sort});
-    };
+
+    handleSubmitComment = comment =>
+        console.log(comment);
 
     componentWillMount(){
         const { onLoadCategories, onLoadPosts } = this.props;
@@ -40,7 +47,7 @@ class ReadableApp extends Component{
     }
 
     render(){
-        const { is_open_drawer, is_open_sort_menu, sort } = this.state;
+        const { is_open_drawer, is_open_sort_menu, is_open_comment_form, sort } = this.state;
         const { posts = {}, categories, onCreatePost } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
@@ -49,12 +56,17 @@ class ReadableApp extends Component{
                     open={is_open_drawer}
                     categories={categories}
                     onClose={()=>this.toggleDrawer(false)}
+                    onSave={this.handleSubmitComment}
                 />
                 <SortMenu
                     open={is_open_sort_menu}
                     sortBy={sort}
                     onClose={()=>this.toggleSortMenu(false)}
                     onSortBy={this.handleSortBy}
+                />
+                <CommentForm
+                    open={is_open_comment_form}
+                    onClose={()=>this.toggleCommentForm(false)}
                 />
                 <Route
                     exact path="/"
@@ -75,7 +87,11 @@ class ReadableApp extends Component{
                 />
                 <Route
                     path="/post/:id"
-                    component={ PostPage }
+                    render={ ({match}) =>
+                        <PostPage
+                            id={match.params.id}
+                            onOpenForm= { () => this.toggleCommentForm(true) }
+                        />}
                 />
                 <Route
                     path="/form-post/:id?"

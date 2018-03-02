@@ -6,13 +6,14 @@ import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
 import EditIcon from 'react-icons/lib/md/create';
 import HeartIcon from 'react-icons/lib/md/favorite';
+import CommentIcon from 'react-icons/lib/md/comment';
 import BarContainer from './BarContainer';
 import MainContainer from './MainContainer';
 import Post from './Post';
 import CommentList from "./CommentList";
 
 const PostDetails = props => {
-    const { classes, post = {}, comments = [] } = props;
+    const { classes, post = {}, comments = [], onOpenForm } = props;
     const { id, author, body, title, voteScore=0 } = post;
     return (
         <Fragment>
@@ -30,6 +31,9 @@ const PostDetails = props => {
                         variant="title"
                         color="inherit"
                         className={classes.flex} />
+                    <IconButton onClick={onOpenForm} color="inherit">
+                        <CommentIcon />
+                    </IconButton>
                     <IconButton component={Link} to={`/form-post/${id}`} color="inherit">
                         <EditIcon/>
                     </IconButton>
