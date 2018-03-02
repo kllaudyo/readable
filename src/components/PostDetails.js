@@ -13,7 +13,16 @@ import Post from './Post';
 import CommentList from "./CommentList";
 
 const PostDetails = props => {
-    const { classes, post = {}, comments = [], onOpenForm, onPositivePost, onNegativePost } = props;
+    const {
+        classes,
+        post = {},
+        comments = [],
+        onOpenForm,
+        onPositivePost,
+        onNegativePost,
+        onPositiveComment,
+        onNegativeComment
+    } = props;
     const { id, author, body, title, voteScore=0 } = post;
     return (
         <Fragment>
@@ -58,7 +67,11 @@ const PostDetails = props => {
                 />
                 {comments.length > 0 && (
                     <Paper className={classes.root} elevation={0}>
-                        <CommentList comments={comments} />
+                        <CommentList
+                            comments={comments}
+                            onPositiveComment={onPositiveComment}
+                            onNegativeComment={onNegativeComment}
+                        />
                     </Paper>
                 )}
             </MainContainer>
