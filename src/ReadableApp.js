@@ -2,16 +2,21 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import sortBy from 'sort-by';
-import { fetchCategories, fetchPosts } from './actions';
+import { fetchCategories, fetchPosts, sortPosts } from './actions';
 import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
 import PostPage from './components/PostPage';
-import PostFormPage from './components/PostFormPage';
 import SortMenu from "./components/SortMenu";
 import {filterArrayByCategory, findByPath} from "./utils";
 import EditPostPage from "./components/EditPostPage";
 import CommentForm from "./components/CommentForm";
+import C from "./utils/constants";
+
+const sortOptions = [
+    {value:C.SORTED_BY_DATE, text:'Date'},
+    {value:C.SORTED_BY_VOTE_SCORE, text:'Score'},
+];
 
 class ReadableApp extends Component{
 
@@ -20,8 +25,7 @@ class ReadableApp extends Component{
         this.state = {
             is_open_drawer : false,
             is_open_sort_menu : false,
-            is_open_comment_form : false,
-            sort:'-voteScore'
+            is_open_comment_form : false
         }
     }
 
@@ -34,9 +38,6 @@ class ReadableApp extends Component{
     toggleCommentForm = is_open_comment_form =>
         this.setState({is_open_comment_form});
 
-    handleSortBy = sort =>
-        this.setState({sort});
-
     handleSubmitComment = comment =>
         console.log(comment);
 
@@ -47,8 +48,8 @@ class ReadableApp extends Component{
     }
 
     render(){
-        const { is_open_drawer, is_open_sort_menu, is_open_comment_form, sort } = this.state;
-        const { posts = {}, categories, onCreatePost } = this.props;
+        const { is_open_drawer, is_open_sort_menu, is_open_comment_form } = this.state;
+        const { posts = {}, categories, sort, onSortBy } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
             <Fragment>
@@ -60,13 +61,15 @@ class ReadableApp extends Component{
                 />
                 <SortMenu
                     open={is_open_sort_menu}
+                    options={sortOptions}
                     sortBy={sort}
                     onClose={()=>this.toggleSortMenu(false)}
-                    onSortBy={this.handleSortBy}
+                    onSortBy={onSortBy}
                 />
                 <CommentForm
                     open={is_open_comment_form}
                     onClose={()=>this.toggleCommentForm(false)}
+                    onSubmit={this.handleSubmitComment}
                 />
                 <Route
                     exact path="/"
@@ -102,14 +105,16 @@ class ReadableApp extends Component{
     }
 }
 
-const mapStateToProps = ({posts, categories}, ownProps) => ({
+const mapStateToProps = ({posts, categories, sort}, ownProps) => ({
     posts,
-    categories
+    categories,
+    sort
 });
 
 const mapDispatchToProps = dispatch => ({
     onLoadCategories: () => dispatch(fetchCategories()),
-    onLoadPosts: () => dispatch(fetchPosts())
+    onLoadPosts: () => dispatch(fetchPosts()),
+    onSortBy: (sortBy) => dispatch(sortPosts(sortBy))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));

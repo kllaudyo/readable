@@ -10,12 +10,7 @@ import {
 import CheckedIcon from 'react-icons/lib/md/radio-button-checked';
 import UnCheckedIcon from 'react-icons/lib/md/radio-button-unchecked';
 
-const sortOptions = [
-    {value:'-timestamp',text:'Date'},
-    {value:'-voteScore',text:'Score'},
-];
-
-const SortMenu = ({open, sortBy="date", onClose, onSortBy}) => (
+const SortMenu = ({open, options=[], sortBy="date", onClose, onSortBy}) => (
     <Dialog
         aria-labelledby="simple-dialog-title"
         open={open}
@@ -23,7 +18,7 @@ const SortMenu = ({open, sortBy="date", onClose, onSortBy}) => (
         <DialogTitle id="simple-dialog-title">Sort By</DialogTitle>
         <div>
             <List>
-                {sortOptions.map( ({value, text}) =>
+                {options.map( ({value, text}) =>
                     <ListItem key={value} button onClick={() => onSortBy(value)}>
                         <ListItemIcon>
                             {sortBy === value && (
