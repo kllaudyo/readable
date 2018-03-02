@@ -1,4 +1,5 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles/index';
 import {
     TextField,
     Button,
@@ -7,21 +8,21 @@ import {
     DialogContent,
     DialogActions
 } from 'material-ui';
+import classes from '../classes';
 
-const CommentForm = ({ open, comment={}, onChange, onClose, onSave }) =>
+const CommentForm = ({ classes, open, comment={}, onClose, onSave }) =>
     <Dialog
         open={open}
         onClose={onClose}
         arial-labelledby="form-dialog-title"
     >
         <DialogTitle>Comment</DialogTitle>
-        <DialogContent style={{minWidth:350}}>
+        <DialogContent className={classes.commentForm}>
             <TextField
                 autoFocus
                 margin="dense"
                 label="Tell us your comment:"
                 fullWidth
-                onChange={e => onChange(e.target.value)}
             />
         </DialogContent>
         <DialogActions>
@@ -40,4 +41,4 @@ const CommentForm = ({ open, comment={}, onChange, onClose, onSave }) =>
         </DialogActions>
     </Dialog>;
 
-export default CommentForm;
+export default withStyles(classes)(CommentForm);
