@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import sortBy from 'sort-by';
-import { fetchCategories, fetchPosts, sortPosts } from './actions';
+import { fetchCategories, fetchPosts, sortPosts, votePost } from './actions';
 import MainMenu from './components/MainMenu';
 import HomePage from './components/HomePage';
 import CategoryPage from './components/CategoryPage';
@@ -49,7 +49,14 @@ class ReadableApp extends Component{
 
     render(){
         const { is_open_drawer, is_open_sort_menu, is_open_comment_form } = this.state;
-        const { posts = {}, categories, sort, onSortBy } = this.props;
+        const {
+            posts = {},
+            categories,
+            sort,
+            onSortBy,
+            onPositivePost,
+            onNegativePost
+        } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
             <Fragment>
@@ -77,6 +84,8 @@ class ReadableApp extends Component{
                         posts={sortedPosts}
                         onOpenDrawer={() => this.toggleDrawer(true)}
                         onOpenSortMenu={() => this.toggleSortMenu(true)}
+                        onPositivePost={onPositivePost}
+                        onNegativePost={onNegativePost}
                     />}
                 />
                 <Route
@@ -86,6 +95,8 @@ class ReadableApp extends Component{
                         posts={filterArrayByCategory(sortedPosts, match.params.path)}
                         onOpenDrawer={() => this.toggleDrawer(true)}
                         onOpenSortMenu={() => this.toggleSortMenu(true)}
+                        onPositivePost={onPositivePost}
+                        onNegativePost={onNegativePost}
                     />}
                 />
                 <Route
@@ -93,7 +104,9 @@ class ReadableApp extends Component{
                     render={ ({match}) =>
                         <PostPage
                             id={match.params.id}
-                            onOpenForm= { () => this.toggleCommentForm(true) }
+                            onOpenForm= {() => this.toggleCommentForm(true)}
+                            onPositivePost={onPositivePost}
+                            onNegativePost={onNegativePost}
                         />
                     }
                 />
@@ -116,6 +129,8 @@ const mapDispatchToProps = dispatch => ({
     onLoadCategories: () => dispatch(fetchCategories()),
     onLoadPosts: () => dispatch(fetchPosts()),
     onSortBy: sortBy => dispatch(sortPosts(sortBy)),
+    onPositivePost: ({id}) => dispatch(votePost(id, "upVote")),
+    onNegativePost: ({id}) => dispatch(votePost(id, "downVote")),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));
