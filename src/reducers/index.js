@@ -88,4 +88,14 @@ const comments = (state=[], action) => {
     }
 };
 
-export default combineReducers({categories, posts, comments});
+const sort = (state=C.SORTED_BY_VOTE_SCORE, action) => {
+    const { sortBy } = action;
+    switch(action.type){
+        case C.SORT_POSTS:
+            return sortBy;
+        default:
+            return state;
+    }
+};
+
+export default combineReducers({categories, posts, comments, sort});
