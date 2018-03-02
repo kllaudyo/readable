@@ -94,7 +94,8 @@ class ReadableApp extends Component{
                         <PostPage
                             id={match.params.id}
                             onOpenForm= { () => this.toggleCommentForm(true) }
-                        />}
+                        />
+                    }
                 />
                 <Route
                     path="/form-post/:id?"
@@ -105,16 +106,16 @@ class ReadableApp extends Component{
     }
 }
 
-const mapStateToProps = ({posts, categories, sort}, ownProps) => ({
+const mapStateToProps = ({posts, categories, sort}) => ({
     posts,
     categories,
-    sort
+    sort,
 });
 
 const mapDispatchToProps = dispatch => ({
     onLoadCategories: () => dispatch(fetchCategories()),
     onLoadPosts: () => dispatch(fetchPosts()),
-    onSortBy: (sortBy) => dispatch(sortPosts(sortBy))
+    onSortBy: sortBy => dispatch(sortPosts(sortBy)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));
