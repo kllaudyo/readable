@@ -46,7 +46,7 @@ const PostDetails = props => {
                     </IconButton>
                 </Toolbar>
             </BarContainer>
-            <MainContainer classNames={classes.container}>
+            <MainContainer classNames={classes.main}>
                 <Post
                     author={author}
                     title={title}

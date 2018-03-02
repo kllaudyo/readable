@@ -61,7 +61,7 @@ class PostForm extends Component{
                         />
                     </Toolbar>
                 </BarContainer>
-                <MainContainer classNames={classes.container}>
+                <MainContainer classNames={classes.main}>
                     <form ref={ref => this.form = ref} onSubmit={e => this.handleSubmit(e)} noValidate autoComplete="off">
                         <FormControl
                             fullWidth

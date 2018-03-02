@@ -1,13 +1,15 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles/index';
 import { ListItem, ListItemText } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Person from 'react-icons/lib/md/person';
-import lightBlue from 'material-ui/colors/lightBlue';
+import classes from '../classes';
 
-const CommentItem = ({id, author, body, date}) => (
+
+const CommentItem = ({id, author, body, date, classes}) => (
     <React.Fragment>
         <ListItem button>
-            <Avatar style={{backgroundColor:lightBlue[200]}}>
+            <Avatar className={classes.avatar}>
                 <Person />
             </Avatar>
             <ListItemText
@@ -18,4 +20,4 @@ const CommentItem = ({id, author, body, date}) => (
     </React.Fragment>
 );
 
-export default CommentItem;
+export default withStyles(classes)(CommentItem);

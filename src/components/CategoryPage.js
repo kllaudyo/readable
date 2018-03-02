@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import classes from '../classes';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -9,22 +10,6 @@ import PostList from "./PostList";
 import BarContainer from "./BarContainer";
 import MainContainer from './MainContainer';
 import AddFab from './AddFab';
-
-const styles = {
-    root: {
-        flexGrow: 1,
-    },
-    container:{
-        marginTop:'60px'
-    },
-    flex: {
-        flex: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    },
-};
 
 class CategoryPage extends Component{
 
@@ -75,4 +60,4 @@ class CategoryPage extends Component{
     }
 }
 
-export default withStyles(styles)(CategoryPage);
+export default withStyles(classes)(CategoryPage);

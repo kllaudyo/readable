@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles/index";
 import {
@@ -16,17 +17,43 @@ import ArrowBackIcon from 'react-icons/lib/md/arrow-back';
 import SaveIcon from "react-icons/lib/md/save";
 import BarContainer from './BarContainer';
 import MainContainer from './MainContainer';
+import { findById } from "../utils";
+import { createPost } from "../actions";
 
+const styles = theme => ({
+    container:theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+        marginTop: theme.spacing.unit * 8,
+    }),
+    flex: {
+        flex: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    leftIcon: {
+        marginRight: theme.spacing.unit,
+    },
+});
 
 class PostFormPage extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            author:"",
-            title:"",
-            body:"",
-            category:""
+            author: props.author,
+            title: props.title,
+            body: props.body,
+            category: props.category
         }
     }
 
@@ -42,7 +69,7 @@ class PostFormPage extends Component{
     };
 
     render(){
-        const { classes, categories=[] } = this.props;
+        const { classes, categories } = this.props;
         const { title, author, body, category } = this.state;
         return (
             <Fragment>
@@ -134,27 +161,27 @@ class PostFormPage extends Component{
     }
 }
 
-export default withStyles(theme => ({
-    container:theme.mixins.gutters({
-        paddingTop: 16,
-        paddingBottom: 16,
-        marginTop: theme.spacing.unit * 8,
-    }),
-    flex: {
-        flex: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit
-    },
-    button: {
-        margin: theme.spacing.unit,
-    },
-    leftIcon: {
-        marginRight: theme.spacing.unit,
-    },
-}))(PostFormPage);
+PostFormPage.defaultProps = {
+    author:'',
+    title:'',
+    body:'',
+    category:'',
+    categories: []
+};
+
+const mapStateToProps = ({ posts, categories }, { match={} }) => {
+    const { author, title, body, category } = findById(posts, match.params.id);
+    return ({
+        author,
+        title,
+        body,
+        category,
+        categories
+    })
+};
+
+const mapDispatchToProps = dispatch => ({
+    onCreatePost: ({title, author, body, category}) => dispatch(createPost({title, author, body, category}))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PostFormPage));

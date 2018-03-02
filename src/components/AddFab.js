@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { withStyles } from 'material-ui/styles';
 import { Button } from 'material-ui';
+import classes from '../classes';
 import AddIcon from 'react-icons/lib/md/add';
 
 const AddFab = ({href, classes}) => (
@@ -17,8 +18,4 @@ const AddFab = ({href, classes}) => (
     </Button>
 );
 
-export default withStyles(theme => ({fab: {
-        position:'absolute',
-        bottom: theme.spacing.unit * 2,
-        right: theme.spacing.unit * 2
-    }}))(AddFab);
+export default withStyles(classes)(AddFab);
