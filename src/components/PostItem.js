@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles/index';
-import { ListItem, ListItemText } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Avatar from 'material-ui/Avatar';
+import { Divider, Avatar, IconButton, ListItem, ListItemText, ListItemSecondaryAction, Badge } from 'material-ui';
 import Person from 'react-icons/lib/md/person';
+import ThumbDownIcon from "react-icons/lib/md/thumb-down";
+import ThumbUpIcon from "react-icons/lib/md/thumb-up";
+import HeartIcon from 'react-icons/lib/md/favorite';
 import classes from '../classes';
 
-const PostItem = ({classes, id, author, title, date}) => (
+const PostItem = ({classes, id, author, title, date, voteScore}) => (
     <React.Fragment>
         <ListItem button component={ Link } to={`/post/${id}`}>
             <Avatar className={classes.avatar}>
@@ -17,6 +18,19 @@ const PostItem = ({classes, id, author, title, date}) => (
                 primary={title}
                 secondary={`${author} - ${date}`}
             />
+            <ListItemSecondaryAction>
+                <IconButton>
+                <Badge badgeContent={voteScore} color="secondary">
+                    <HeartIcon/>
+                </Badge>
+                </IconButton>
+                <IconButton>
+                    <ThumbDownIcon />
+                </IconButton>
+                <IconButton>
+                    <ThumbUpIcon />
+                </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
         <Divider />
     </React.Fragment>
