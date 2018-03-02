@@ -15,6 +15,7 @@ export const
         path
     }),
 
+
     fetchCategories = () => dispatch =>
         API.getCategories()
             .then(({ categories }) =>
@@ -34,6 +35,12 @@ export const
         deleted
     }),
 
+    postVoteScore = ({id, voteScore}) => ({
+        type: C.POST_VOTE_SCORE,
+        id,
+        voteScore
+    }),
+
     fetchPosts = () => dispatch =>
         API.getPosts()
             .then(posts => posts.map(post => {
@@ -44,6 +51,10 @@ export const
     createPost = ({id=uniqid(), timestamp=Date.now(), title, body, author, category, voteScore=1, deleted=false}) =>
             dispatch => API.addPost({id, timestamp, title, body, author, category, voteScore, deleted })
                 .then( post => dispatch(addPost(post)) ),
+
+    votePost = (id, vote) =>
+            dispatch => API.votePost(id, vote)
+                .then( post => dispatch(postVoteScore(post))),
 
     addComment = ({id=uniqid(), parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false}) => ({
         type: C.ADD_COMMENT,
@@ -63,5 +74,11 @@ export const
 
     createComment = ({id=uniqid(), parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false}) =>
         dispatch => API.addComment({id,timestamp, body, author, parentId, voteScore, deleted, parentDeleted})
-            .then(comment => dispatch(addComment(comment)))
+            .then(comment => dispatch(addComment(comment))),
+
+    commentVoteScore = (id, option) => ({
+        type: C.COMMENT_VOTE_SCORE,
+        id,
+        option
+    })
 ;

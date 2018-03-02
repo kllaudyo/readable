@@ -40,6 +40,13 @@ const post = (state={}, action) => {
                 voteScore,
                 deleted
             };
+        case C.POST_VOTE_SCORE:
+            return (state.id !== id) ?
+                state :
+                {
+                    ...state,
+                    voteScore
+                };
         default:
             return state;
     }
@@ -52,6 +59,10 @@ const posts = (state=[], action) => {
                 ...state,
                 post({}, action)
             ];
+        case C.POST_VOTE_SCORE:
+            return state.map(
+                p => post(p, action)
+            );
         default:
             return state;
     }
