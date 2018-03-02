@@ -13,7 +13,7 @@ import CommentList from "./CommentList";
 
 const PostDetails = props => {
     const { classes, post = {}, comments = [] } = props;
-    const { id, author, body, title, voteScore } = post;
+    const { id, author, body, title, voteScore=0 } = post;
     return (
         <Fragment>
             <BarContainer>
