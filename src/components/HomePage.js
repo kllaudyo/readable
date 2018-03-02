@@ -7,22 +7,7 @@ import PostList from './PostList';
 import MainContainer from "./MainContainer";
 import BarContainer from "./BarContainer";
 import AddFab from "./AddFab";
-
-const styles = {
-    root: {
-        flexGrow: 1,
-    },
-    container:{
-        marginTop:'60px'
-    },
-    flex: {
-        flex: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    }
-};
+import classes from "../classes";
 
 class HomePage extends Component {
 
@@ -71,4 +56,4 @@ class HomePage extends Component {
     }
 }
 
-export default withStyles(styles)(HomePage);
+export default withStyles(classes)(HomePage);
