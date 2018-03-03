@@ -5,9 +5,10 @@ import Person from 'react-icons/lib/md/person';
 import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
 import HeartIcon from 'react-icons/lib/md/favorite';
+import DeleteIcon from 'react-icons/lib/md/delete';
 import classes from '../classes';
 
-const CommentItem = ({id, author, body, date, voteScore, classes, onPositiveComment, onNegativeComment}) => (
+const CommentItem = ({id, author, body, date, voteScore, classes, onPositiveComment, onNegativeComment, onDeleteComment}) => (
     <React.Fragment>
         <ListItem button>
             <Avatar className={classes.avatar}>
@@ -28,6 +29,9 @@ const CommentItem = ({id, author, body, date, voteScore, classes, onPositiveComm
                 </IconButton>
                 <IconButton onClick={()=>onPositiveComment({id})}>
                     <ThumbUpIcon />
+                </IconButton>
+                <IconButton onClick={()=>onDeleteComment({id})}>
+                    <DeleteIcon/>
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>
