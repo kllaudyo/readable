@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import dateformat from 'dateformat';
 import {
     Typography,
@@ -16,5 +17,19 @@ const Post = ({ title, author, body, timestamp=0 }) => (
         </Grid>
     </Grid>
 );
+
+Post.propTypes = {
+    title: PropTypes.string,
+    author: PropTypes.string,
+    body: PropTypes.string,
+    timestamp: PropTypes.number
+};
+
+Post.defaultProps = {
+    title:undefined,
+    author:undefined,
+    body:undefined,
+    timestamp: 0
+};
 
 export default Post;

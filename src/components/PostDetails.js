@@ -66,6 +66,7 @@ const PostDetails = props => {
                 </Toolbar>
             </BarContainer>
             <MainContainer>
+                <div className={classes.main}>
                 <Post
                     author={author}
                     title={title}
@@ -83,6 +84,7 @@ const PostDetails = props => {
                         />
                     </Paper>
                 )}
+                </div>
             </MainContainer>
         </Fragment>
     );
