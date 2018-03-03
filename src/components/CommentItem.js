@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles/index';
 import { Avatar, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Badge } from 'material-ui';
 import dateformat from 'dateformat';
@@ -44,6 +45,30 @@ const CommentItem = ({comment, classes, onOpenForm, onPositiveComment, onNegativ
             </ListItem>
         </React.Fragment>
     );
+};
+
+CommentItem.propTypes = {
+    comment: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired,
+        timestamp: PropTypes.number.isRequired,
+        voteScore: PropTypes.number.isRequired
+    }).isRequired,
+    classes: PropTypes.object.isRequired,
+    onOpenForm: PropTypes.func.isRequired,
+    onPositiveComment: PropTypes.func.isRequired,
+    onNegativeComment: PropTypes.func.isRequired,
+    onDeleteComment: PropTypes.func.isRequired
+};
+
+CommentItem.defaultProps = {
+    comment: {},
+    classes: {},
+    onOpenForm: f=>f,
+    onPositiveComment: f=>f,
+    onNegativeComment: f=>f,
+    onDeleteComment: f=>f
 };
 
 export default withStyles(classes)(CommentItem);
