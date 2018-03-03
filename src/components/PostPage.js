@@ -7,14 +7,15 @@ import PostDetails from './PostDetails';
 import CommentForm from "./CommentForm";
 import classes from '../classes';
 import C from "../utils/constants";
-import {createComment, removeComment} from "../actions";
+import {createComment, removeComment, updateComment} from "../actions";
 
 class PostPage extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            is_open_comment_form: false
+            is_open_comment_form: false,
+            edit_comment : {}
         };
     }
 
@@ -22,24 +23,32 @@ class PostPage extends Component{
         this.setState({is_open_comment_form});
 
     handleSubmitComment = ({id, author, body}) => {
-        const { onCreateComment, post } = this.props;
-        id === undefined ?
-            onCreateComment({id, body, parentId:post.id}) :
-            null;
+        const { onCreateComment, onUpdateComment, post } = this.props;
+        id === null ?
+            onCreateComment({body, parentId:post.id}) :
+            onUpdateComment({id, body});
+    };
+
+    handleOpenForm = (comment={}) => {
+        this.setState({
+            is_open_comment_form:true,
+            edit_comment: comment
+        });
     };
 
     render(){
-        const { is_open_comment_form } = this.state;
+        const { is_open_comment_form, edit_comment } = this.state;
         return (
             <Fragment>
                 <CommentForm
                     open={is_open_comment_form}
+                    comment={edit_comment}
                     onClose={()=>this.toggleCommentForm(false)}
                     onSubmit={this.handleSubmitComment}
                 />
                 <PostDetails
                     {...this.props}
-                    onOpenForm={()=>this.toggleCommentForm(true)}
+                    onOpenForm={this.handleOpenForm}
                 />
             </Fragment>
         );
@@ -57,6 +66,8 @@ const mapStateToProps = ({posts, comments}, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
     onCreateComment: ({body, parentId}) =>
         dispatch(createComment({body, parentId})),
+    onUpdateComment: ({id, body}) =>
+        dispatch(updateComment({id, body})),
     onDeleteComment: ({id}) =>
         dispatch(removeComment(id))
 });
