@@ -3,7 +3,7 @@ import {List, ListSubheader} from 'material-ui';
 import CommentItem from "./CommentItem";
 
 const CommentList = ({comments, onOpenForm, onPositiveComment, onNegativeComment, onDeleteComment}) => (
-    <List subheader={<ListSubheader>Comments</ListSubheader>}>
+    <List subheader={<ListSubheader>{comments.length} Comments</ListSubheader>}>
         {comments.map( comment =>
             <CommentItem
                 key={comment.id}

@@ -5,7 +5,7 @@ import PostItem from "./PostItem";
 const PostList = ({posts, onPositivePost, onNegativePost}) => (
     <List>
         { posts.map(
-            ({id, author, title, timestamp, voteScore}) =>
+            ({id, author, title, timestamp, voteScore, commentCount}) =>
                 <PostItem
                     key={id}
                     id={id}
@@ -13,6 +13,7 @@ const PostList = ({posts, onPositivePost, onNegativePost}) => (
                     title={title}
                     date={timestamp}
                     voteScore={voteScore}
+                    commentCount={commentCount}
                     onPositivePost={onPositivePost}
                     onNegativePost={onNegativePost}
                 />)
