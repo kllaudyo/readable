@@ -21,7 +21,8 @@ const PostDetails = props => {
         onPositivePost,
         onNegativePost,
         onPositiveComment,
-        onNegativeComment
+        onNegativeComment,
+        onDeleteComment
     } = props;
     const { id, author, body, title, voteScore=0 } = post;
     return (
@@ -71,6 +72,7 @@ const PostDetails = props => {
                             comments={comments}
                             onPositiveComment={onPositiveComment}
                             onNegativeComment={onNegativeComment}
+                            onDeleteComment={onDeleteComment}
                         />
                     </Paper>
                 )}

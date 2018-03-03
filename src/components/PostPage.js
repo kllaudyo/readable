@@ -7,7 +7,7 @@ import PostDetails from './PostDetails';
 import CommentForm from "./CommentForm";
 import classes from '../classes';
 import C from "../utils/constants";
-import {createComment} from "../actions";
+import {createComment, removeComment} from "../actions";
 
 class PostPage extends Component{
 
@@ -49,13 +49,16 @@ class PostPage extends Component{
 const mapStateToProps = ({posts, comments}, ownProps) => ({
     post: findById(posts, ownProps.id),
     comments: filterArrayByParentId(comments, ownProps.id)
+        .filter(comment => comment.deleted === false)
         .sort(sortBy(C.SORTED_BY_VOTE_SCORE)),
     ...ownProps
 });
 
 const mapDispatchToProps = dispatch => ({
     onCreateComment: ({body, parentId}) =>
-        dispatch(createComment({body, parentId}))
+        dispatch(createComment({body, parentId})),
+    onDeleteComment: ({id}) =>
+        dispatch(removeComment(id))
 });
 
 export default connect(

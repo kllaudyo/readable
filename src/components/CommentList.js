@@ -2,7 +2,7 @@ import React from 'react';
 import {List, ListSubheader} from 'material-ui';
 import CommentItem from "./CommentItem";
 
-const CommentList = ({comments, onPositiveComment, onNegativeComment}) => (
+const CommentList = ({comments, onPositiveComment, onNegativeComment, onDeleteComment}) => (
     <List subheader={<ListSubheader>Comments</ListSubheader>}>
         { comments.map(
             ({id, author, body, timestamp, voteScore}) =>
@@ -15,6 +15,7 @@ const CommentList = ({comments, onPositiveComment, onNegativeComment}) => (
                     voteScore={voteScore}
                     onPositiveComment={onPositiveComment}
                     onNegativeComment={onNegativeComment}
+                    onDeleteComment={onDeleteComment}
                 />)
         }
     </List>
