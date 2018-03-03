@@ -51,7 +51,7 @@ class CategoryPage extends Component{
         return (
             <Fragment>
                 {this.renderToolbar(category.name)}
-                <MainContainer classNames={classes.container}>
+                <MainContainer>
                     <PostList
                         posts={posts}
                         onPositivePost={onPositivePost}

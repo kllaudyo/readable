@@ -47,7 +47,7 @@ class HomePage extends Component {
         return (
             <Fragment>
                 {this.renderToolbar()}
-                <MainContainer classNames={classes.container}>
+                <MainContainer>
                     <PostList
                         posts={posts}
                         onPositivePost={onPositivePost}

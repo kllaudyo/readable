@@ -1,9 +1,11 @@
 import React from 'react';
+import { withStyles } from 'material-ui/styles';
+import classes from '../classes';
 
-const MainContainer = ({classNames, children}) => (
-    <div className={classNames}>
+const MainContainer = ({classes, children}) => (
+    <div className={classes.container}>
         { children }
     </div>
 );
 
-export default MainContainer;
+export default withStyles(classes)(MainContainer);
