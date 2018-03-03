@@ -43,7 +43,7 @@ class HomePage extends Component {
     }
 
     render(){
-        const { classes, posts, onPositivePost, onNegativePost } = this.props;
+        const { posts, onPositivePost, onNegativePost } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar()}

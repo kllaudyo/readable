@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PostIcon from 'react-icons/lib/md/local-post-office';
 import {
@@ -36,5 +37,20 @@ const MainMenu = ({open, categories, onClose}) => (
         </div>
     </Drawer>
 );
+
+MainMenu.propTypes = {
+    open: PropTypes.bool.isRequired,
+    categories: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        path: PropTypes.string.isRequired
+    })).isRequired,
+    onClose: PropTypes.func.isRequired
+};
+
+MainMenu.defaultProps = {
+    open: false,
+    categories:[],
+    onClose: f=>f
+};
 
 export default MainMenu;

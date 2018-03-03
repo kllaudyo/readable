@@ -47,7 +47,7 @@ class CategoryPage extends Component{
     }
 
     render(){
-        const { classes, category={}, posts=[], onPositivePost, onNegativePost } = this.props;
+        const { category={}, posts=[], onPositivePost, onNegativePost } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar(category.name)}
