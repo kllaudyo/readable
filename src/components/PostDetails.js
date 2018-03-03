@@ -15,6 +15,7 @@ import CommentList from "./CommentList";
 
 const PostDetails = props => {
     const {
+        history,
         classes,
         post = {},
         comments = [],
@@ -26,14 +27,13 @@ const PostDetails = props => {
         onDeleteComment,
         onDeletePost
     } = props;
-    const { id, author, body, timestamp, title, voteScore=0, commentCount=0 } = post;
+    const { id, author, body, timestamp, title, voteScore=0} = post;
     return (
         <Fragment>
             <BarContainer>
                 <Toolbar>
                     <IconButton
-                        component={Link}
-                        to="/"
+                        onClick={()=>history.go(-1)}
                         color="inherit"
                         aria-label="Menu"
                         className={classes.menuButton}>

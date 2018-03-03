@@ -35,22 +35,22 @@ class PostForm extends Component{
     handleSubmit = e => {
         e.preventDefault();
         const { title, author, body, category } = this.state;
-        const { id, onCreatePost, onUpdatePost } = this.props;
+        const { id, onCreatePost, onUpdatePost, history } = this.props;
         id!==null ?
             onUpdatePost({id, title, author, body, category }):
             onCreatePost({ title, author, body, category });
+        history.go(-1);
     };
 
     render(){
-        const { classes, categories } = this.props;
+        const { classes, categories, history } = this.props;
         const { title, author, body, category } = this.state;
         return (
             <Fragment>
                 <BarContainer>
                     <Toolbar>
                         <IconButton
-                            component={Link}
-                            to="/"
+                            onClick={()=>history.go(-1)}
                             color="inherit"
                             aria-label="Menu"
                             className={classes.menuButton}>

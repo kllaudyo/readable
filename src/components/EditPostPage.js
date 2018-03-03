@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withStyles } from "material-ui/styles/index";
 import { findById } from "../utils";
@@ -5,7 +6,7 @@ import { createPost, updatePost } from "../actions/async/";
 import classes from "../classes";
 import PostForm from "./PostForm";
 
-const mapStateToProps = ({ posts, categories }, { match }) => {
+const mapStateToProps = ({ posts, categories }, { match, history }) => {
     const { id, author, title, body, category } = match.params.id ? findById(posts, match.params.id) : {};
     return ({
         id,
@@ -13,6 +14,7 @@ const mapStateToProps = ({ posts, categories }, { match }) => {
         title,
         body,
         category,
+        history,
         categories
     })
 };
@@ -22,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
     onUpdatePost: (post) => dispatch(updatePost(post))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(classes)(PostForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(classes)(PostForm)));
