@@ -6,10 +6,10 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import SortIcon from 'react-icons/lib/md/sort-by-alpha';
 import {withStyles} from "material-ui/styles/index";
-import PostList from "./PostList";
-import BarContainer from "./BarContainer";
-import MainContainer from './MainContainer';
-import AddFab from './AddFab';
+import PostList from "../components/PostList";
+import BarContainer from "../components/BarContainer";
+import MainContainer from '../components/MainContainer';
+import AddFab from '../components/AddFab';
 
 class CategoryPage extends Component{
 

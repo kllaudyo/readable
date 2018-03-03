@@ -4,7 +4,7 @@ import { withStyles } from "material-ui/styles/index";
 import { findById } from "../utils";
 import { createPost, updatePost } from "../actions/async/";
 import classes from "../classes";
-import PostForm from "./PostForm";
+import PostForm from "../components/PostForm";
 
 const mapStateToProps = ({ posts, categories }, { match, history }) => {
     const { id, author, title, body, category } = match.params.id ? findById(posts, match.params.id) : {};

@@ -3,10 +3,10 @@ import { withStyles } from 'material-ui/styles';
 import { Toolbar, Typography, IconButton } from 'material-ui'
 import MenuIcon from 'material-ui-icons/Menu';
 import SortIcon from 'react-icons/lib/md/sort-by-alpha';
-import PostList from './PostList';
-import MainContainer from "./MainContainer";
-import BarContainer from "./BarContainer";
-import AddFab from "./AddFab";
+import PostList from '../components/PostList';
+import MainContainer from "../components/MainContainer";
+import BarContainer from "../components/BarContainer";
+import AddFab from "../components/AddFab";
 import classes from "../classes";
 
 class HomePage extends Component {

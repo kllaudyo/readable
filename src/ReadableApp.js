@@ -5,12 +5,12 @@ import sortBy from 'sort-by';
 import { sortPosts } from './actions/sync/';
 import { fetchCategories, fetchPosts, votePost, voteComment } from './actions/async/';
 import MainMenu from './components/MainMenu';
-import HomePage from './components/HomePage';
-import CategoryPage from './components/CategoryPage';
-import PostPage from './components/PostPage';
+import HomePage from './views/HomePage';
+import CategoryPage from './views/CategoryPage';
+import PostPage from './views/PostPage';
 import SortMenu from "./components/SortMenu";
 import {filterArrayByCategory, findByPath} from "./utils";
-import EditPostPage from "./components/EditPostPage";
+import EditPostPage from "./views/EditPostPage";
 import C from "./utils/constants";
 
 const sortOptions = [
