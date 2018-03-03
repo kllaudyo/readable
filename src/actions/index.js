@@ -68,6 +68,24 @@ export const
         parentDeleted
     }),
 
+    editComment = ({id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted}) => ({
+        type: C.EDIT_COMMENT,
+        id,
+        parentId,
+        timestamp,
+        body,
+        author,
+        voteScore,
+        deleted,
+        parentDeleted
+    }),
+
+    deleteComment = ({id}) => ({
+        type: C.DELETE_COMMENT,
+        id,
+        deleted:true
+    }),
+
     fetchComments = id => dispatch =>
         API.getCommentsByPost(id)
             .then(comments => comments.map(comment => dispatch(addComment(comment)))),
@@ -75,6 +93,10 @@ export const
     createComment = ({id=uniqid(), parentId, timestamp=Date.now(), body, author, voteScore=1, deleted=false, parentDeleted=false}) =>
         dispatch => API.addComment({id,timestamp, body, author, parentId, voteScore, deleted, parentDeleted})
             .then(comment => dispatch(addComment(comment))),
+
+    removeComment =  id => dispatch =>
+        API.deleteComment(id)
+            .then( comment => dispatch(deleteComment(comment))),
 
     commentVoteScore = ({id, voteScore}) => ({
         type: C.COMMENT_VOTE_SCORE,

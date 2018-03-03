@@ -82,6 +82,26 @@ const comment = (state={}, action) => {
                 deleted,
                 parentDeleted
             };
+        case C.EDIT_COMMENT:
+            return state.id !== id ?
+                state :
+                {
+                    ...state,
+                    parentId,
+                    timestamp,
+                    body,
+                    author,
+                    voteScore,
+                    deleted,
+                    parentDeleted
+                };
+        case C.DELETE_COMMENT:
+            return state.id !== id ?
+                state :
+                {
+                    ...state,
+                    deleted,
+                };
         case C.COMMENT_VOTE_SCORE:
             return state.id !== id ?
                 state :
@@ -101,6 +121,11 @@ const comments = (state=[], action) => {
                 ...state,
                 comment({}, action)
             ];
+        case C.EDIT_COMMENT:
+        case C.DELETE_COMMENT:
+            return state.map(
+                c => comment(c, action)
+            );
         case C.COMMENT_VOTE_SCORE:
             return state.map(
                 c => comment(c, action)

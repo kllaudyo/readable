@@ -31,6 +31,10 @@ export const
         fetch(`${base_url}/comments`, { headers, method: 'POST', body: JSON.stringify(comment) })
             .then(res => res.json()),
 
+    deleteComment = id =>
+        fetch(`${base_url}/comments/${id}`, { headers, method: 'DELETE' })
+            .then(res => res.json()),
+
     voteComment = (id, option) =>
         fetch(`${base_url}/comments/${id}`, { headers, method: 'POST', body: JSON.stringify({option}) })
             .then(res => res.json())
