@@ -112,7 +112,7 @@ class ReadableApp extends Component{
 }
 
 const mapStateToProps = ({posts, categories, sort}) => ({
-    posts,
+    posts: posts.filter(post => post.deleted === false),
     categories,
     sort,
 });

@@ -7,6 +7,7 @@ import ThumbUpIcon from "react-icons/lib/md/thumb-up";
 import EditIcon from 'react-icons/lib/md/create';
 import HeartIcon from 'react-icons/lib/md/favorite';
 import CommentIcon from 'react-icons/lib/md/comment';
+import DeleteIcon from 'react-icons/lib/md/delete';
 import BarContainer from './BarContainer';
 import MainContainer from './MainContainer';
 import Post from './Post';
@@ -22,7 +23,8 @@ const PostDetails = props => {
         onNegativePost,
         onPositiveComment,
         onNegativeComment,
-        onDeleteComment
+        onDeleteComment,
+        onDeletePost
     } = props;
     const { id, author, body, title, voteScore=0 } = post;
     return (
@@ -46,6 +48,9 @@ const PostDetails = props => {
                     </IconButton>
                     <IconButton component={Link} to={`/form-post/${id}`} color="inherit">
                         <EditIcon/>
+                    </IconButton>
+                    <IconButton color="inherit">
+                        <DeleteIcon onClick={()=>onDeletePost(post)} />
                     </IconButton>
                     <IconButton onClick={()=>onNegativePost(post)} color="inherit">
                         <ThumbDownIcon/>

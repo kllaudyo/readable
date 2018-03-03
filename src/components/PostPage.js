@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import { filterArrayByParentId, findById } from "../utils";
@@ -7,7 +8,7 @@ import PostDetails from './PostDetails';
 import CommentForm from "./CommentForm";
 import classes from '../classes';
 import C from "../utils/constants";
-import {createComment, removeComment, updateComment} from "../actions/async/";
+import {createComment, removeComment, updateComment, removePost} from "../actions/async/";
 
 class PostPage extends Component{
 
@@ -36,6 +37,12 @@ class PostPage extends Component{
         });
     };
 
+    handleDeletePost = post => {
+        const { history, onDeletePost } = this.props;
+        onDeletePost(post);
+        history.go(-1);
+    };
+
     render(){
         const { is_open_comment_form, edit_comment } = this.state;
         return (
@@ -49,6 +56,7 @@ class PostPage extends Component{
                 <PostDetails
                     {...this.props}
                     onOpenForm={this.handleOpenForm}
+                    onDeletePost={this.handleDeletePost}
                 />
             </Fragment>
         );
@@ -64,15 +72,13 @@ const mapStateToProps = ({posts, comments}, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onCreateComment: ({body, parentId}) =>
-        dispatch(createComment({body, parentId})),
-    onUpdateComment: ({id, body}) =>
-        dispatch(updateComment({id, body})),
-    onDeleteComment: ({id}) =>
-        dispatch(removeComment(id))
+    onDeletePost: ({id}) => dispatch(removePost(id)),
+    onCreateComment: ({body, parentId}) => dispatch(createComment({body, parentId})),
+    onUpdateComment: ({id, body}) => dispatch(updateComment({id, body})),
+    onDeleteComment: ({id}) => dispatch(removeComment(id))
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(withStyles(classes)(PostPage));
+)(withStyles(classes)(PostPage)));
