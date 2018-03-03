@@ -11,11 +11,12 @@ import {
 import classes from '../classes';
 
 const CommentForm = ({ classes, open, comment={}, onClose, onSubmit }) => {
-    const { id=null, body = "" } = comment;
-    let _comment;
+    const { id=null, author="", body = "" } = comment;
+    let _comment, _author;
     const submit = e => {
-        onSubmit({body: _comment.value, id});
+        onSubmit({author: _author.value, body: _comment.value, id});
         onClose();
+        _author.value = "";
         _comment.value = "";
     };
     return (
@@ -32,6 +33,13 @@ const CommentForm = ({ classes, open, comment={}, onClose, onSubmit }) => {
                     inputRef={input => _comment = input}
                     margin="dense"
                     label="Tell us your comment:"
+                    fullWidth
+                />
+                <TextField
+                    inputProps={{defaultValue: author}}
+                    inputRef={input => _author = input}
+                    margin="dense"
+                    label="Tell us your name:"
                     fullWidth
                 />
             </DialogContent>

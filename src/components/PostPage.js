@@ -26,8 +26,8 @@ class PostPage extends Component{
     handleSubmitComment = ({id, author, body}) => {
         const { onCreateComment, onUpdateComment, post } = this.props;
         id === null ?
-            onCreateComment({body, parentId:post.id}) :
-            onUpdateComment({id, body});
+            onCreateComment({author, body, parentId:post.id}) :
+            onUpdateComment({id, author, body});
     };
 
     handleOpenForm = (comment={}) => {
@@ -73,8 +73,8 @@ const mapStateToProps = ({posts, comments}, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     onDeletePost: ({id}) => dispatch(removePost(id)),
-    onCreateComment: ({body, parentId}) => dispatch(createComment({body, parentId})),
-    onUpdateComment: ({id, body}) => dispatch(updateComment({id, body})),
+    onCreateComment: ({author, body, parentId}) => dispatch(createComment({author, body, parentId})),
+    onUpdateComment: ({id, author, body}) => dispatch(updateComment({id, author, body})),
     onDeleteComment: ({id}) => dispatch(removeComment(id))
 });
 
