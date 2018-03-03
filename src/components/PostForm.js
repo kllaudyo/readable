@@ -35,8 +35,10 @@ class PostForm extends Component{
     handleSubmit = e => {
         e.preventDefault();
         const { title, author, body, category } = this.state;
-        const { onCreatePost } = this.props;
-        onCreatePost({ title, author, body, category });
+        const { id, onCreatePost, onUpdatePost } = this.props;
+        id!==null ?
+            onUpdatePost({id, title, author, body, category }):
+            onCreatePost({ title, author, body, category });
     };
 
     render(){
@@ -133,6 +135,7 @@ class PostForm extends Component{
 }
 
 PostForm.defaultProps = {
+    id:null,
     author:'',
     title:'',
     body:'',
