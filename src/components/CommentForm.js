@@ -11,43 +11,45 @@ import {
 import classes from '../classes';
 
 const CommentForm = ({ classes, open, comment={}, onClose, onSubmit }) => {
+    const { id=null, body = "" } = comment;
     let _comment;
     const submit = e => {
-        onSubmit({body: _comment.value});
+        onSubmit({body: _comment.value, id});
         onClose();
         _comment.value = "";
     };
     return (
         <Dialog
-        open={open}
-        onClose={onClose}
-        arial-labelledby="form-dialog-title"
-    >
-        <DialogTitle>Comment</DialogTitle>
-        <DialogContent className={classes.commentForm}>
-            <TextField
-                autoFocus
-                inputRef={input => _comment = input}
-                margin="dense"
-                label="Tell us your comment:"
-                fullWidth
-            />
-        </DialogContent>
-        <DialogActions>
-            <Button
-                onClick={onClose}
-                color="primary"
-            >
-                Cancel
-            </Button>
-            <Button
-                onClick={submit}
-                color="primary"
-            >
-                Save
-            </Button>
-        </DialogActions>
-    </Dialog>
+            open={open}
+            onClose={onClose}
+            arial-labelledby="form-dialog-title"
+        >
+            <DialogTitle>Comment</DialogTitle>
+            <DialogContent className={classes.commentForm}>
+                <TextField
+                    autoFocus
+                    inputProps={{defaultValue:body}}
+                    inputRef={input => _comment = input}
+                    margin="dense"
+                    label="Tell us your comment:"
+                    fullWidth
+                />
+            </DialogContent>
+            <DialogActions>
+                <Button
+                    onClick={onClose}
+                    color="primary"
+                >
+                    Cancel
+                </Button>
+                <Button
+                    onClick={submit}
+                    color="primary"
+                >
+                    Save
+                </Button>
+            </DialogActions>
+        </Dialog>
     );
 };
 
