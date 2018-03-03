@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles/index';
 import { Divider, Avatar, IconButton, ListItem, ListItemText, ListItemSecondaryAction, Badge } from 'material-ui';
@@ -42,5 +43,29 @@ const PostItem = ({classes, id, author, title, date, voteScore, commentCount, on
         <Divider />
     </React.Fragment>
 );
+
+PostItem.propTypes = {
+    classes: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    voteScore: PropTypes.number.isRequired,
+    commentCount: PropTypes.number.isRequired,
+    onPositivePost: PropTypes.func.isRequired,
+    onNegativePost: PropTypes.func.isRequired
+};
+
+PostItem.defaultProps = {
+    classes: {},
+    id: "",
+    author: "",
+    title: "",
+    date: 0,
+    voteScore: 0,
+    commentCount: 0,
+    onPositivePost: f=>f,
+    onNegativePost: f=>f
+};
 
 export default withStyles(classes)(PostItem);

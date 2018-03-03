@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Dialog,
     DialogTitle,
@@ -10,7 +11,7 @@ import {
 import CheckedIcon from 'react-icons/lib/md/radio-button-checked';
 import UnCheckedIcon from 'react-icons/lib/md/radio-button-unchecked';
 
-const SortMenu = ({open, options=[], sortBy="date", onClose, onSortBy}) => (
+const SortMenu = ({open, options, sortBy, onClose, onSortBy}) => (
     <Dialog
         aria-labelledby="simple-dialog-title"
         open={open}
@@ -34,5 +35,21 @@ const SortMenu = ({open, options=[], sortBy="date", onClose, onSortBy}) => (
         </div>
     </Dialog>
 );
+
+SortMenu.propTypes = {
+    open: PropTypes.bool.isRequired,
+    options: PropTypes.array.isRequired,
+    sortBy: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSortBy: PropTypes.func.isRequired
+};
+
+SortMenu.defaultProps = {
+    open: false,
+    options: [],
+    sortBy: "-votescore",
+    onClose: f=>f,
+    onSortBy: f=>f
+};
 
 export default SortMenu;
