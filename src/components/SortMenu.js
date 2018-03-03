@@ -21,11 +21,11 @@ const SortMenu = ({open, options=[], sortBy="date", onClose, onSortBy}) => (
                 {options.map( ({value, text}) =>
                     <ListItem key={value} button onClick={() => onSortBy(value)}>
                         <ListItemIcon>
-                            {sortBy === value && (
-                                <CheckedIcon />
-                            ) || (
-                                <UnCheckedIcon />
-                            )}
+                            {
+                                sortBy === value ?
+                                    <CheckedIcon /> :
+                                    <UnCheckedIcon />
+                            }
                         </ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
