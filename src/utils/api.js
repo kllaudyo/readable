@@ -31,6 +31,10 @@ export const
         fetch(`${base_url}/comments`, { headers, method: 'POST', body: JSON.stringify(comment) })
             .then(res => res.json()),
 
+    editComment = comment =>
+        fetch(`${base_url}/comments/${comment.id}`, { headers, method: 'PUT', body: JSON.stringify(comment) })
+            .then(res => res.json()),
+
     deleteComment = id =>
         fetch(`${base_url}/comments/${id}`, { headers, method: 'DELETE' })
             .then(res => res.json()),

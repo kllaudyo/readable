@@ -107,6 +107,10 @@ export const
                 dispatch(addCommentPost(comment.parentId));
             }),
 
+    updateComment = ({id, body, timestamp=Date.now()}) => dispatch =>
+        API.editComment({id, body, timestamp})
+            .then( comment => dispatch(editComment(comment))),
+
     removeComment =  id => dispatch =>
         API.deleteComment(id)
             .then( comment => {
