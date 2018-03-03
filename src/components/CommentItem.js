@@ -9,7 +9,7 @@ import DeleteIcon from 'react-icons/lib/md/delete';
 import EditIcon from 'react-icons/lib/md/create';
 import classes from '../classes';
 
-const CommentItem = ({comment, classes, onPositiveComment, onNegativeComment, onDeleteComment}) => {
+const CommentItem = ({comment, classes, onOpenForm, onPositiveComment, onNegativeComment, onDeleteComment}) => {
     const { id, author, body, date, voteScore } = comment;
     return (
         <React.Fragment>
@@ -32,6 +32,9 @@ const CommentItem = ({comment, classes, onPositiveComment, onNegativeComment, on
                     </IconButton>
                     <IconButton onClick={()=>onPositiveComment({id})}>
                         <ThumbUpIcon />
+                    </IconButton>
+                    <IconButton onClick={()=>onOpenForm(comment)}>
+                        <EditIcon/>
                     </IconButton>
                     <IconButton onClick={()=>onDeleteComment({id})}>
                         <DeleteIcon/>

@@ -70,6 +70,7 @@ const PostDetails = props => {
                     <Paper className={classes.root} elevation={0}>
                         <CommentList
                             comments={comments}
+                            onOpenForm={onOpenForm}
                             onPositiveComment={onPositiveComment}
                             onNegativeComment={onNegativeComment}
                             onDeleteComment={onDeleteComment}
