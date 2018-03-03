@@ -1,6 +1,7 @@
 import {
     addCategory,
     addPost,
+    deletePost,
     postVoteScore,
     addCommentPost,
     deleteCommentPost,
@@ -31,6 +32,10 @@ export const
     createPost = ({id=uniqid(), timestamp=Date.now(), title, body, author, category, voteScore=1, deleted=false}) =>
         dispatch => API.addPost({id, timestamp, title, body, author, category, voteScore, deleted })
             .then( post => dispatch(addPost(post)) ),
+
+    removePost = id => dispatch =>
+        API.deletePost(id)
+            .then( post => dispatch(deletePost(post))),
 
     votePost = (id, vote) =>
         dispatch => API.votePost(id, vote)

@@ -26,6 +26,12 @@ export const
         commentCount
     }),
 
+    deletePost = ({ id, deleted }) => ({
+        type: C.DELETE_POST,
+        id,
+        deleted
+    }),
+
     addCommentPost = id => ({
         type: C.ADD_COMMENT,
         id

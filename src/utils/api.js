@@ -23,6 +23,10 @@ export const
         fetch(`${base_url}/posts/${id}`, { headers, method: 'POST', body: JSON.stringify({option}) })
             .then(res => res.json()),
 
+    deletePost = id =>
+        fetch(`${base_url}/posts/${id}`, { headers, method: 'DELETE' })
+            .then(res => res.json()),
+
     getCommentsByPost = id =>
         fetch(`${base_url}/posts/${id}/comments`, { headers })
             .then(res => res.json()),

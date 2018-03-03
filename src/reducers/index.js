@@ -56,6 +56,13 @@ const post = (state={}, action) => {
                     id,
                     commentCount: state.commentCount+1
                 };
+        case C.DELETE_POST:
+            return state.id !== id ?
+                state :
+                {
+                    ...state,
+                    deleted
+                };
         case C.DELETE_COMMENT:
             return state.id !== id ?
                 state :
@@ -78,6 +85,7 @@ const posts = (state=[], action) => {
             ];
         case C.POST_VOTE_SCORE:
         case C.ADD_COMMENT:
+        case C.DELETE_POST:
         case C.DELETE_COMMENT:
             return state.map(
                 p => post(p, action)
