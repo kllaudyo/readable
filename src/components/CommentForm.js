@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles/index';
 import {
     TextField,
@@ -59,6 +60,26 @@ const CommentForm = ({ classes, open, comment={}, onClose, onSubmit }) => {
             </DialogActions>
         </Dialog>
     );
+};
+
+CommentForm.propTypes = {
+    open: PropTypes.bool.isRequired,
+    comment: PropTypes.shape({
+        id: PropTypes.string,
+        author: PropTypes.string,
+        body: PropTypes.string
+    }),
+    classes: PropTypes.object.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+};
+
+CommentForm.defaultProps = {
+    open: false,
+    comment: {},
+    classes: {},
+    onClose: f=>f,
+    onSubmit: f=>f
 };
 
 export default withStyles(classes)(CommentForm);
