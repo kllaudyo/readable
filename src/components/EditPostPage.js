@@ -1,8 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from "material-ui/styles/index";
 import { findById } from "../utils";
-import { createPost } from "../actions";
+import { createPost } from "../actions/async/";
 import classes from "../classes";
 import PostForm from "./PostForm";
 

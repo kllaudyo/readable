@@ -7,7 +7,7 @@ import PostDetails from './PostDetails';
 import CommentForm from "./CommentForm";
 import classes from '../classes';
 import C from "../utils/constants";
-import {createComment, removeComment, updateComment} from "../actions";
+import {createComment, removeComment, updateComment} from "../actions/async/";
 
 class PostPage extends Component{
 
