@@ -28,6 +28,7 @@ export const
             .then(posts => posts.map(post => {
                 dispatch(addPost(post));
                 post.commentCount && dispatch(fetchComments(post.id));
+                return post;
             })),
 
     createPost = ({id=uniqid(), timestamp=Date.now(), title, body, author, category, voteScore=1, deleted=false}) =>
@@ -55,6 +56,7 @@ export const
             .then(comment => {
                 dispatch(addComment(comment));
                 dispatch(addCommentPost(comment.parentId));
+                return comment;
             }),
 
     updateComment = ({id, author, body, timestamp=Date.now()}) => dispatch =>
@@ -66,6 +68,7 @@ export const
             .then( comment => {
                 dispatch(deleteComment(comment));
                 dispatch(deleteCommentPost(comment.parentId));
+                return comment;
             }),
 
     voteComment = (id, vote) =>
