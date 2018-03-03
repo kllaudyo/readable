@@ -26,6 +26,16 @@ export const
         commentCount
     }),
 
+    editPost = ({id, timestamp, title, body, author, category}) => ({
+        type: C.EDIT_POST,
+        id,
+        timestamp,
+        title,
+        body,
+        author,
+        category
+    }),
+
     deletePost = ({ id, deleted }) => ({
         type: C.DELETE_POST,
         id,

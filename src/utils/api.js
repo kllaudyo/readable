@@ -19,6 +19,10 @@ export const
         fetch(`${base_url}/posts`, { headers, method: 'POST', body: JSON.stringify(post) })
             .then(res => res.json()),
 
+    editPost = post =>
+        fetch(`${base_url}/posts/${post.id}`, { headers, method: 'PUT', body: JSON.stringify(post) })
+            .then(res => res.json()),
+
     votePost = (id, option) =>
         fetch(`${base_url}/posts/${id}`, { headers, method: 'POST', body: JSON.stringify({option}) })
             .then(res => res.json()),
