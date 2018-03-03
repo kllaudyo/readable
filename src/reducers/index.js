@@ -27,7 +27,7 @@ const categories = (state=[], action) => {
 };
 
 const post = (state={}, action) => {
-    const { id, timestamp, title, body, author, category, voteScore, deleted } = action;
+    const { id, timestamp, title, body, author, category, voteScore, deleted, commentCount } = action;
     switch(action.type){
         case C.ADD_POST:
             return {
@@ -38,7 +38,8 @@ const post = (state={}, action) => {
                 author,
                 category,
                 voteScore,
-                deleted
+                deleted,
+                commentCount
             };
         case C.POST_VOTE_SCORE:
             return (state.id !== id) ?
@@ -46,6 +47,22 @@ const post = (state={}, action) => {
                 {
                     ...state,
                     voteScore
+                };
+        case C.ADD_COMMENT:
+            return state.id !== id ?
+                state :
+                {
+                    ...state,
+                    id,
+                    commentCount: state.commentCount+1
+                };
+        case C.DELETE_COMMENT:
+            return state.id !== id ?
+                state :
+                {
+                    ...state,
+                    id,
+                    commentCount: state.commentCount-1
                 };
         default:
             return state;
@@ -60,6 +77,8 @@ const posts = (state=[], action) => {
                 post({}, action)
             ];
         case C.POST_VOTE_SCORE:
+        case C.ADD_COMMENT:
+        case C.DELETE_COMMENT:
             return state.map(
                 p => post(p, action)
             );
@@ -123,9 +142,6 @@ const comments = (state=[], action) => {
             ];
         case C.EDIT_COMMENT:
         case C.DELETE_COMMENT:
-            return state.map(
-                c => comment(c, action)
-            );
         case C.COMMENT_VOTE_SCORE:
             return state.map(
                 c => comment(c, action)
