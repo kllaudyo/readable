@@ -13,7 +13,7 @@ const CategoryItem = ({name, path}) => (
     </ListItem>
 );
 
-CategoryIcon.propTypes = {
+CategoryItem.propTypes = {
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired
 };
