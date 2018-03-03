@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles/index';
 import { Avatar, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Badge } from 'material-ui';
+import dateformat from 'dateformat';
 import Person from 'react-icons/lib/md/person';
 import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
@@ -10,7 +11,7 @@ import EditIcon from 'react-icons/lib/md/create';
 import classes from '../classes';
 
 const CommentItem = ({comment, classes, onOpenForm, onPositiveComment, onNegativeComment, onDeleteComment}) => {
-    const { id, author, body, date, voteScore } = comment;
+    const { id, author, body, timestamp, voteScore } = comment;
     return (
         <React.Fragment>
             <ListItem button>
@@ -19,7 +20,7 @@ const CommentItem = ({comment, classes, onOpenForm, onPositiveComment, onNegativ
                 </Avatar>
                 <ListItemText
                     primary={body}
-                    secondary={`${author} - ${date}`}
+                    secondary={`${author} - ${dateformat(new Date(timestamp),'yyyy-dd-mm HH:MM')}`}
                 />
                 <ListItemSecondaryAction>
                     <IconButton>

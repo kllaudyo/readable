@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles/index';
 import { Divider, Avatar, IconButton, ListItem, ListItemText, ListItemSecondaryAction, Badge } from 'material-ui';
+import dateformat from 'dateformat';
 import Person from 'react-icons/lib/md/person';
 import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
-import HeartIcon from 'react-icons/lib/md/favorite';
+import HeartIcon from 'react-icons/lib/md/favorite'
+import CommentIcon from 'react-icons/lib/md/comment';
 import classes from '../classes';
 
-const PostItem = ({classes, id, author, title, date, voteScore, onPositivePost, onNegativePost}) => (
+const PostItem = ({classes, id, author, title, date, voteScore, commentCount, onPositivePost, onNegativePost}) => (
     <React.Fragment>
         <ListItem button component={ Link } to={`/post/${id}`}>
             <Avatar className={classes.avatar}>
@@ -16,13 +18,18 @@ const PostItem = ({classes, id, author, title, date, voteScore, onPositivePost, 
             </Avatar>
             <ListItemText
                 primary={title}
-                secondary={`${author} - ${date}`}
+                secondary={`${author} - ${dateformat(new Date(date),'yyyy-dd-mm HH:MM')}`}
             />
             <ListItemSecondaryAction>
                 <IconButton>
-                <Badge badgeContent={voteScore} color="secondary">
-                    <HeartIcon/>
-                </Badge>
+                    <Badge badgeContent={commentCount} color="primary">
+                        <CommentIcon/>
+                    </Badge>
+                </IconButton>
+                <IconButton>
+                    <Badge badgeContent={voteScore} color="secondary">
+                        <HeartIcon/>
+                    </Badge>
                 </IconButton>
                 <IconButton onClick={()=>onNegativePost({id})}>
                     <ThumbDownIcon />

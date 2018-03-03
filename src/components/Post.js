@@ -1,13 +1,16 @@
 import React from 'react';
-import Typography from 'material-ui/Typography';
-import Grid from 'material-ui/Grid';
-import Divider from 'material-ui/Divider';
+import dateformat from 'dateformat';
+import {
+    Typography,
+    Grid,
+    Divider
+} from 'material-ui';
 
-const Post = ({ title, author, body }) => (
+const Post = ({ title, author, body, timestamp=0 }) => (
     <Grid container spacing={Number(40)}>
         <Grid item xs={12} xl={12} style={{marginRight:20}}>
             <Typography variant="title" gutterBottom>{title}</Typography>
-            <Typography type="subheading" gutterBottom >{author}</Typography>
+            <Typography type="subheading" gutterBottom >{`${author} - ${dateformat(new Date(timestamp),'yyyy-dd-mm HH:MM')} `}</Typography>
             <Divider light />
             <Typography type="body1" style={{marginTop:16}} gutterBottom>{body}</Typography>
         </Grid>

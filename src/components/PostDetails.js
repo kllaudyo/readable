@@ -26,7 +26,7 @@ const PostDetails = props => {
         onDeleteComment,
         onDeletePost
     } = props;
-    const { id, author, body, title, voteScore=0 } = post;
+    const { id, author, body, timestamp, title, voteScore=0, commentCount=0 } = post;
     return (
         <Fragment>
             <BarContainer>
@@ -69,6 +69,7 @@ const PostDetails = props => {
                 <Post
                     author={author}
                     title={title}
+                    timestamp={timestamp}
                     body={body}
                 />
                 {comments.length > 0 && (
