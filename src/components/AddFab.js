@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { withStyles } from 'material-ui/styles';
 import { Button } from 'material-ui';
@@ -17,5 +18,9 @@ const AddFab = ({href, classes}) => (
         <AddIcon size={24}/>
     </Button>
 );
+
+AddFab.propTypes = {
+    href: PropTypes.string.isRequired
+};
 
 export default withStyles(classes)(AddFab);
