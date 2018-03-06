@@ -26,6 +26,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "deep-freeze": "^0.0.1",
     "redux-devtools-extension": "^2.13.2"
   }
 }
