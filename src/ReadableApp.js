@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import sortBy from 'sort-by';
 import { sortPosts } from './actions/sync/';
 import { fetchCategories, fetchPosts, votePost, voteComment } from './actions/async/';
@@ -68,44 +68,49 @@ class ReadableApp extends Component{
                     onClose={()=>this.toggleSortMenu(false)}
                     onSortBy={onSortBy}
                 />
-                <Route
-                    exact path="/"
-                    render={ () => <HomePage
-                        posts={sortedPosts}
-                        onOpenDrawer={() => this.toggleDrawer(true)}
-                        onOpenSortMenu={() => this.toggleSortMenu(true)}
-                        onPositivePost={onPositivePost}
-                        onNegativePost={onNegativePost}
-                    />}
-                />
-                <Route
-                    path="/category/:path"
-                    render={ ({match}) => <CategoryPage
-                        category={findByPath(categories, match.params.path)}
-                        posts={filterArrayByCategory(sortedPosts, match.params.path)}
-                        onOpenDrawer={() => this.toggleDrawer(true)}
-                        onOpenSortMenu={() => this.toggleSortMenu(true)}
-                        onPositivePost={onPositivePost}
-                        onNegativePost={onNegativePost}
-                    />}
-                />
-                <Route
-                    path="/post/:id"
-                    render={ ({match}) =>
-                        <PostPage
-                            id={match.params.id}
-                            onOpenForm= {() => this.toggleCommentForm(true)}
+                <Switch>
+                    <Route
+                        exact path="/"
+                        render={ () => <HomePage
+                            posts={sortedPosts}
+                            onOpenDrawer={() => this.toggleDrawer(true)}
+                            onOpenSortMenu={() => this.toggleSortMenu(true)}
                             onPositivePost={onPositivePost}
                             onNegativePost={onNegativePost}
-                            onPositiveComment={onPositiveComment}
-                            onNegativeComment={onNegativeComment}
-                        />
-                    }
-                />
-                <Route
-                    path="/form-post/:id?"
-                    component = { EditPostPage }
-                />
+                        />}
+                    />
+                    <Route
+                        exact
+                        path="/form-post/:id?"
+                        component = { EditPostPage }
+                    />
+                    <Route
+                        exact
+                        path="/:category"
+                        render={ ({match}) => <CategoryPage
+                            category={findByPath(categories, match.params.category)}
+                            posts={filterArrayByCategory(sortedPosts, match.params.category)}
+                            onOpenDrawer={() => this.toggleDrawer(true)}
+                            onOpenSortMenu={() => this.toggleSortMenu(true)}
+                            onPositivePost={onPositivePost}
+                            onNegativePost={onNegativePost}
+                        />}
+                    />
+                    <Route
+                        exact
+                        path="/:category/:id"
+                        render={ ({match}) =>
+                            <PostPage
+                                id={match.params.id}
+                                onOpenForm= {() => this.toggleCommentForm(true)}
+                                onPositivePost={onPositivePost}
+                                onNegativePost={onNegativePost}
+                                onPositiveComment={onPositiveComment}
+                                onNegativeComment={onNegativeComment}
+                            />
+                        }
+                    />
+                </Switch>
             </Fragment>
         );
     }

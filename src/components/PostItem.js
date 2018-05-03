@@ -7,13 +7,13 @@ import dateformat from 'dateformat';
 import Person from 'react-icons/lib/md/person';
 import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
-import HeartIcon from 'react-icons/lib/md/favorite'
+import HeartIcon from 'react-icons/lib/md/favorite';
 import CommentIcon from 'react-icons/lib/md/comment';
 import classes from '../classes';
 
-const PostItem = ({classes, id, author, title, date, voteScore, commentCount, onPositivePost, onNegativePost}) => (
+const PostItem = ({classes, id, category, author, title, date, voteScore, commentCount, onPositivePost, onNegativePost}) => (
     <React.Fragment>
-        <ListItem button component={ Link } to={`/post/${id}`}>
+        <ListItem button component={ Link } to={`/${category}/${id}`}>
             <Avatar className={classes.avatar}>
                 <Person />
             </Avatar>
@@ -47,6 +47,7 @@ const PostItem = ({classes, id, author, title, date, voteScore, commentCount, on
 PostItem.propTypes = {
     classes: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,

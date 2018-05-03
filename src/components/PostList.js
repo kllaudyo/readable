@@ -6,10 +6,11 @@ import PostItem from "./PostItem";
 const PostList = ({posts, onPositivePost, onNegativePost}) => (
     <List>
         { posts.map(
-            ({id, author, title, timestamp, voteScore, commentCount}) =>
+            ({id, category, author, title, timestamp, voteScore, commentCount}) =>
                 <PostItem
                     key={id}
                     id={id}
+                    category={category}
                     author={author}
                     title={title}
                     date={timestamp}
