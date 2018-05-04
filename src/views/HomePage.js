@@ -43,7 +43,7 @@ class HomePage extends Component {
     }
 
     render(){
-        const { posts, onPositivePost, onNegativePost } = this.props;
+        const { posts, onPositivePost, onNegativePost, onDeletePost } = this.props;
         return (
             <Fragment>
                 {this.renderToolbar()}
@@ -52,6 +52,7 @@ class HomePage extends Component {
                         posts={posts}
                         onPositivePost={onPositivePost}
                         onNegativePost={onNegativePost}
+                        onDeletePost={onDeletePost}
                     />
                 </MainContainer>
                 <AddFab href="/form-post" />

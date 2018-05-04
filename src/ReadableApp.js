@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import sortBy from 'sort-by';
 import { sortPosts } from './actions/sync/';
-import { fetchCategories, fetchPosts, votePost, voteComment } from './actions/async/';
+import { fetchCategories, fetchPosts, votePost, voteComment, removePost } from './actions/async/';
 import MainMenu from './components/MainMenu';
 import HomePage from './views/HomePage';
 import CategoryPage from './views/CategoryPage';
@@ -50,7 +50,8 @@ class ReadableApp extends Component{
             onPositivePost,
             onNegativePost,
             onPositiveComment,
-            onNegativeComment
+            onNegativeComment,
+            onDeletePost
         } = this.props;
         const sortedPosts = posts.sort(sortBy(sort));
         return (
@@ -77,6 +78,7 @@ class ReadableApp extends Component{
                             onOpenSortMenu={() => this.toggleSortMenu(true)}
                             onPositivePost={onPositivePost}
                             onNegativePost={onNegativePost}
+                            onDeletePost={onDeletePost}
                         />}
                     />
                     <Route
@@ -129,7 +131,8 @@ const mapDispatchToProps = dispatch => ({
     onPositivePost: ({id}) => dispatch(votePost(id, "upVote")),
     onNegativePost: ({id}) => dispatch(votePost(id, "downVote")),
     onPositiveComment: ({id}) => dispatch(voteComment(id, "upVote")),
-    onNegativeComment: ({id}) => dispatch(voteComment(id, "downVote"))
+    onNegativeComment: ({id}) => dispatch(voteComment(id, "downVote")),
+    onDeletePost: ({id}) => dispatch(removePost(id))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReadableApp));
