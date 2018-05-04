@@ -112,6 +112,9 @@ class ReadableApp extends Component{
                             />
                         }
                     />
+
+                    <Route render={() => <img src="/404.jpg" />} />
+
                 </Switch>
             </Fragment>
         );
