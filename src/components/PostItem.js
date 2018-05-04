@@ -9,9 +9,11 @@ import ThumbDownIcon from "react-icons/lib/md/thumb-down";
 import ThumbUpIcon from "react-icons/lib/md/thumb-up";
 import HeartIcon from 'react-icons/lib/md/favorite';
 import CommentIcon from 'react-icons/lib/md/comment';
+import EditIcon from 'react-icons/lib/md/create';
+import DeleteIcon from 'react-icons/lib/md/delete';
 import classes from '../classes';
 
-const PostItem = ({classes, id, category, author, title, date, voteScore, commentCount, onPositivePost, onNegativePost}) => (
+const PostItem = ({classes, id, category, author, title, date, voteScore, commentCount, onPositivePost, onNegativePost, onDeletePost}) => (
     <React.Fragment>
         <ListItem button component={ Link } to={`/${category}/${id}`}>
             <Avatar className={classes.avatar}>
@@ -26,6 +28,12 @@ const PostItem = ({classes, id, category, author, title, date, voteScore, commen
                     <Badge badgeContent={commentCount} color="primary">
                         <CommentIcon/>
                     </Badge>
+                </IconButton>
+                <IconButton component={Link} to={`/form-post/${id}`}>
+                    <EditIcon/>
+                </IconButton>
+                <IconButton>
+                    <DeleteIcon onClick={()=>onDeletePost({id})} />
                 </IconButton>
                 <IconButton>
                     <Badge badgeContent={voteScore} color="secondary">
@@ -54,7 +62,8 @@ PostItem.propTypes = {
     voteScore: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired,
     onPositivePost: PropTypes.func.isRequired,
-    onNegativePost: PropTypes.func.isRequired
+    onNegativePost: PropTypes.func.isRequired,
+    onDeletePost: PropTypes.func.isRequired
 };
 
 PostItem.defaultProps = {
