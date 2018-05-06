@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Toolbar, Typography, IconButton, Paper, Badge } from  'material-ui';
 import ArrowBackIcon from 'react-icons/lib/md/arrow-back';
 import ThumbDownIcon from "react-icons/lib/md/thumb-down";
@@ -17,7 +17,7 @@ const PostDetails = props => {
     const {
         history,
         classes,
-        post = {},
+        post,
         comments = [],
         onOpenForm,
         onPositivePost,
@@ -27,7 +27,12 @@ const PostDetails = props => {
         onDeleteComment,
         onDeletePost
     } = props;
+
+    if(!post)
+        return (<Redirect to="/" />);
+
     const { id, author, body, timestamp, title, voteScore=0} = post;
+
     return (
         <Fragment>
             <BarContainer>
