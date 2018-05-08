@@ -81,6 +81,9 @@ class ReadableApp extends Component{
                             onDeletePost={onDeletePost}
                         />}
                     />
+
+                    <Route exact path="/404" render={() => <img src="/404.jpg" />} />
+
                     <Route
                         exact
                         path="/form-post/:id?"
