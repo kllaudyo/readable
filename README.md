@@ -2,7 +2,7 @@
 
 Segundo projeto para avaliação no programa Nanodegree React da Udacity.
 
-## Getting Start
+## Iniciando.
 
 Para executar o aplicativo é necessário seguir os passos a baixo:
 1. Baixar e executar a api-server, para isso [clique aqui](https://github.com/udacity/reactnd-project-readable-starter).
