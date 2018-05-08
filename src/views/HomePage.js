@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import { Toolbar, Typography, IconButton } from 'material-ui'
 import MenuIcon from 'material-ui-icons/Menu';
@@ -44,6 +45,10 @@ class HomePage extends Component {
 
     render(){
         const { posts, onPositivePost, onNegativePost, onDeletePost } = this.props;
+
+        if(!posts)
+            return (<Redirect to="/404" />);
+
         return (
             <Fragment>
                 {this.renderToolbar()}

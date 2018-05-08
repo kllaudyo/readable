@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import classes from '../classes';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -47,7 +48,11 @@ class CategoryPage extends Component{
     }
 
     render(){
-        const { category={}, posts=[], onPositivePost, onNegativePost } = this.props;
+        const { category, posts=[], onPositivePost, onNegativePost } = this.props;
+
+        if(!category)
+            return <Redirect to="/404" />
+
         return (
             <Fragment>
                 {this.renderToolbar(category.name)}

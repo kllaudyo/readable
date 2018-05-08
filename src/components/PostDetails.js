@@ -29,7 +29,7 @@ const PostDetails = props => {
     } = props;
 
     if(!post)
-        return (<Redirect to="/" />);
+        return (<Redirect to="/404" />);
 
     const { id, author, body, timestamp, title, voteScore=0} = post;
 
